@@ -1,0 +1,10 @@
+papers/
+datasets/
+*/*.aux
+*/*.bbl 
+*/*.blg
+*/*.log
+*/*.maf
+*/*.mtc
+*/*.mtc0
+8/\#*
