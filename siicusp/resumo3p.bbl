@@ -1,10 +1,19 @@
 \begin{thebibliography}{1}
 
+\bibitem{DBLP:conf/icdar/2009}
+{\em 10th International Conference on Document Analysis and Recognition, ICDAR
+  2009, Barcelona, Spain, 26-29 July 2009}. IEEE Computer Society, 2009.
+
 \bibitem{10.1109/ICDAR.2007.207}
 A.~Antonacopoulos and D.~Bridson.
 \newblock Performance analysis framework for layout analysis methods.
 \newblock {\em Document Analysis and Recognition, International Conference on},
   2:1258--1262, 2007.
+
+\bibitem{Antonacopoulos09arealistic}
+A.~Antonacopoulos, D.~Bridson, C.~Papadopoulos, and S.~Pletschacher.
+\newblock A realistic dataset for performance evaluation of document layout
+  analysis, 2009.
 
 \bibitem{Antonacopoulos95representationand}
 A.~Antonacopoulos and R.~T. Ritchings.

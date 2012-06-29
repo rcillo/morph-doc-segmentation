@@ -195,17 +195,17 @@ funções booleanas não especificadas completamente.
 
 \subsection{Avaliação da segmentação}
 
-A fim de avaliar o desempenho do método desenvolvido, adotaremos o formato do avaliador automático
+A fim de comparar de forma objetiva o desempenho do método desenvolvido, aplicaremos aos resultados o avaliador automático
 utilizado na competição internacional de segmentação de página ICDAR2009 \cite{DBLP:conf/icdar/2009}.
 
 Este avaliador compara os resultados gerados pelo algoritmo a um resultado manualmente construído.
 A representação das regiões é feita com polígonos isotéticos, onde todos os ângulos possuem 90 graus.
-Esta geometria é flexível o suficiente para representar regiões complexas e não apenas áreas retângulares.
+Esta geometria é flexível o suficiente para representar regiões complexas e não apenas áreas retangulares.
 
 % achei desnecessário para um resumo explicar a estrutura de dados utilizada pelo avaliador.
 
 O processo de medição da acurácia leva em consideração as seguintes relações entre as áreas computadas
-e a esperada:
+e esperadas:
 
 \begin{itemize}
 	\item Intersecção nula.
@@ -215,13 +215,13 @@ e a esperada:
 	\item Região esperada esquecida.
 \end{itemize}
 
-Alguns dos erros descritos acima podem receber um peso maior dependendo do contexto. Agrupar regiões
+Alguns dos erros descritos acima podem receber um peso maior dependendo do contexto. Agrupar regiões distintas
 cuja ordem de leitura seja sequencial, por exemplo, não é considerado um erro.
 
 \section{Resultados esperados}
 
 Alguns resultados publicados atestam a viabilidade dessa abordagem
-(citar artigo do sibgrapi). No entanto, nesses trabalhos a segmentação
+(citar artigo do sibgrapi). No entanto, nesses trabalhos a segmentação % não encontrei este artigo
 de páginas é apresentada apenas como um exemplo de possível aplicação,
 não tendo sido o alvo de investigação.
 
@@ -230,7 +230,7 @@ que simule de forma mais realista uma situação de aplicação real e não apen
 de forma mais previsível e controlada.
 
 Para o treinamento do operador morfológico será utilizado o pacote
-TRIOS, ..... (descrever o pacote).
+TRIOS, ..... (descrever o pacote). % também não conheço ainda.
 
 Finalmente, os resultados obtidos serão comparados com os resultados
 esperados (\emph{ground-truth}), segundo a métrica descrita acima.
