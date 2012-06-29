@@ -75,10 +75,8 @@ problemas abordados nesse campo de pesquisa.
 
 Em análise de documentos, o objetivo é extrair informações sobre o
 conteúdo e estrutura de um documento digitalizado. Uma das etapas
-envolvidas nesse processo é a segmentação de página que consiste na
-identificação de áreas da imagem correspondentes à elementos
-estruturais, tais como títulos, legendas e blocos de texto.
-(é isso que é chamado de análise de alyout?)
+envolvidas nesse processo é a segmentação de página que consiste na separação
+e classificação de regiões da imagem.
 
 Diferentes técnicas de processamento e análise de imagens têm sido
 propostos e aplicados na segmentação de páginas.
@@ -100,7 +98,7 @@ propõem um método
 que observa a distribuição dos espaços em branco em um documento para
 classificar a região em texto ou não. Já
 em~\cite{Moll07documentcontent} extrai-se características dos pixels e
-sua vizinhança, classificando-os e depois agrupando-os em regiões.
+sua vizinhança, classificando-os e posteriormente agrupando-os em regiões.
 
 
 \subsection{Treinamento de operadores morfológicos}
@@ -127,7 +125,7 @@ construção de um operador morfológico baseado em treinamento.
 
 As imagens binárias definidas em um certo domínio $E$ (geralmente
 $E=\mathbb{Z}^2$) podem ser modeladas por uma função $f: E \to
-\{0,1\}$ tal que $f(x)=1$ se e seomente se $x$ é um pixel
+\{0,1\}$ tal que $f(x)=1$ se e somente se $x$ é um pixel
 correspondente a um objeto na imagem (portanto, $f(x)=0$ se $x$
 é um pixel do fundo (\emph{background}) da imagem).
 
@@ -137,13 +135,19 @@ mapeamento do tipo $\Psi: \{0,1\}^E \to \{0,1\}^E$.
 
 Seja $W$ uma janela de observação. Imagens podem ser processadas pixel
 a pixel, considerando-se a vizinhança de cada pixel definida pela
-janela $W$. Tais processaemntos podem ser caracterizados por uma
+janela $W$. Tais processamentos podem ser caracterizados por uma
 função do tipo $\psi: \{0,1\}^W \to \{0,1\}$, da seguinte forma
 \begin{equation}
 [\Psi(f)](x) = \psi(f_{-x}|_W)
 \end{equation} 
 na qual $f_{-x}|_W$ representa a imagem binária $f$ restrita a $W$ em
-torno de $x$.
+torno de $x$. 
+
+% (Esta outra forma de representar $\Psi$ é vantajosa
+% pois a cardinalidade do domínio pode ser menor, permitindo implementá-la
+% de forma mais eficiente em um algorítmo, correto? Não sei se o leitor
+% se atenta para este fato. Talvez valesse a pena escrever?)
+
 
 O erro de um operador é caracterizado por
 \begin{equation}
@@ -191,13 +195,28 @@ funções booleanas não especificadas completamente.
 
 \subsection{Avaliação da segmentação}
 
-O desempenho de algoritmos de processamento de imagens pode ser
-avaliado comparando-se os resultados gerados pelo algoritmo com os
-resultados esperados. Para uma avaliação objetiva, métricas de
-comparação podem ser usadas. Neste trabalho usamos tal tal métrica.
+A fim de avaliar o desempenho do método desenvolvido, adotaremos o formato do avaliador automático
+utilizado na competição internacional de segmentação de página ICDAR2009 \cite{DBLP:conf/icdar/2009}.
 
-Descrever a tal tal métrica.
+Este avaliador compara os resultados gerados pelo algoritmo a um resultado manualmente construído.
+A representação das regiões é feita com polígonos isotéticos, onde todos os ângulos possuem 90 graus.
+Esta geometria é flexível o suficiente para representar regiões complexas e não apenas áreas retângulares.
 
+% achei desnecessário para um resumo explicar a estrutura de dados utilizada pelo avaliador.
+
+O processo de medição da acurácia leva em consideração as seguintes relações entre as áreas computadas
+e a esperada:
+
+\begin{itemize}
+	\item Intersecção nula.
+	\item Cobertura total da região esperada.
+	\item Duas regiões computadas cobrindo apenas uma região esperada.
+	\item Uma região computada cobrindo duas regiões esperadas.
+	\item Região esperada esquecida.
+\end{itemize}
+
+Alguns dos erros descritos acima podem receber um peso maior dependendo do contexto. Agrupar regiões
+cuja ordem de leitura seja sequencial, por exemplo, não é considerado um erro.
 
 \section{Resultados esperados}
 
@@ -206,13 +225,9 @@ Alguns resultados publicados atestam a viabilidade dessa abordagem
 de páginas é apresentada apenas como um exemplo de possível aplicação,
 não tendo sido o alvo de investigação.
 
-Os experimentos serão realizados com  diferentes conjuntos de dados, a
-saber:
-
-\begin{itemize}
-\item X
-\item Y
-\end{itemize}
+Os experimentos serão realizados com um conjunto de dados diversificados \cite{Antonacopoulos09arealistic}, 
+que simule de forma mais realista uma situação de aplicação real e não apenas documentos estruturados
+de forma mais previsível e controlada.
 
 Para o treinamento do operador morfológico será utilizado o pacote
 TRIOS, ..... (descrever o pacote).
