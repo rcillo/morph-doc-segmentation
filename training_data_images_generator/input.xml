@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE document SYSTEM "http://www.csc.liv.ac.uk/~prima/ICDAR2003_competition/XML/groundtruth.dtd" [
+]>
+<document>
+	<document_summary no_pages="1"/>
+	<page page_id="0" image_filename="mp00179bw.tif">
+		<page_summary no_text_regions="21" no_image_regions="1" no_line_drawing_regions="0" no_graphic_regions="0" no_table_regions="0" no_chart_regions="0" no_separator_regions="4" no_maths_regions="0" no_frame_regions="0" no_noise_regions="1"/>
+		<page_pixel_size width="2372" height="3140"/>
+		<text_region id="0" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Heading" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="White">
+			<coords no_coords="4">
+				<point x="607" y="123"/>
+				<point x="607" y="164"/>
+				<point x="125" y="164"/>
+				<point x="125" y="123"/>
+			</coords>
+		</text_region>
+		<separator_region id="1" sep_orientation="0.000" sep_colour="Black" sep_bgcolour="White">
+			<coords no_coords="4">
+				<point x="606" y="177"/>
+				<point x="606" y="179"/>
+				<point x="127" y="179"/>
+				<point x="127" y="177"/>
+			</coords>
+		</separator_region>
+		<text_region id="2" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="White">
+			<coords no_coords="4">
+				<point x="774" y="250"/>
+				<point x="774" y="541"/>
+				<point x="128" y="541"/>
+				<point x="128" y="250"/>
+			</coords>
+		</text_region>
+		<text_region id="3" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="White">
+			<coords no_coords="6">
+				<point x="775" y="557"/>
+				<point x="775" y="680"/>
+				<point x="651" y="680"/>
+				<point x="651" y="856"/>
+				<point x="128" y="856"/>
+				<point x="128" y="557"/>
+			</coords>
+		</text_region>
+		<separator_region id="4" sep_orientation="90.000" sep_colour="Black" sep_bgcolour="White">
+			<coords no_coords="4">
+				<point x="801" y="119"/>
+				<point x="801" y="672"/>
+				<point x="798" y="672"/>
+				<point x="798" y="119"/>
+			</coords>
+		</separator_region>
+		<text_region id="5" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="White">
+			<coords no_coords="4">
+				<point x="1474" y="118"/>
+				<point x="1474" y="549"/>
+				<point x="825" y="549"/>
+				<point x="825" y="118"/>
+			</coords>
+		</text_region>
+		<text_region id="6" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="White">
+			<coords no_coords="4">
+				<point x="1473" y="556"/>
+				<point x="1473" y="680"/>
+				<point x="826" y="680"/>
+				<point x="826" y="556"/>
+			</coords>
+		</text_region>
+		<text_region id="7" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="White">
+			<coords no_coords="4">
+				<point x="2173" y="117"/>
+				<point x="2173" y="636"/>
+				<point x="1524" y="636"/>
+				<point x="1524" y="117"/>
+			</coords>
+		</text_region>
+		<text_region id="8" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="White">
+			<coords no_coords="6">
+				<point x="2174" y="643"/>
+				<point x="2174" y="856"/>
+				<point x="1650" y="856"/>
+				<point x="1650" y="672"/>
+				<point x="1589" y="672"/>
+				<point x="1589" y="643"/>
+			</coords>
+		</text_region>
+		<text_region id="9" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Heading" txt_colour="Grey" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="526" y="954"/>
+				<point x="526" y="979"/>
+				<point x="203" y="979"/>
+				<point x="203" y="954"/>
+			</coords>
+		</text_region>
+		<text_region id="10" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Heading" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="560" y="1016"/>
+				<point x="560" y="1256"/>
+				<point x="203" y="1256"/>
+				<point x="203" y="1016"/>
+			</coords>
+		</text_region>
+		<text_region id="11" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="643" y="2059"/>
+				<point x="643" y="2894"/>
+				<point x="197" y="2894"/>
+				<point x="197" y="2059"/>
+			</coords>
+		</text_region>
+		<text_region id="12" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="1124" y="1820"/>
+				<point x="1124" y="2534"/>
+				<point x="688" y="2534"/>
+				<point x="688" y="1820"/>
+			</coords>
+		</text_region>
+		<text_region id="13" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="1124" y="2536"/>
+				<point x="1124" y="2889"/>
+				<point x="690" y="2889"/>
+				<point x="690" y="2536"/>
+			</coords>
+		</text_region>
+		<text_region id="14" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="1612" y="1822"/>
+				<point x="1612" y="2887"/>
+				<point x="1176" y="2887"/>
+				<point x="1176" y="1822"/>
+			</coords>
+		</text_region>
+		<text_region id="15" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Footer" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="1321" y="3025"/>
+				<point x="1321" y="3050"/>
+				<point x="983" y="3050"/>
+				<point x="983" y="3025"/>
+			</coords>
+		</text_region>
+		<image_region id="16" img_colour_type="24_Bit_Colour" img_orientation="0.000" img_emb_text="No" img_bgcolour="Yellow">
+			<coords no_coords="4">
+				<point x="1618" y="716"/>
+				<point x="1618" y="1714"/>
+				<point x="684" y="1714"/>
+				<point x="684" y="716"/>
+			</coords>
+		</image_region>
+		<text_region id="17" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Caption" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="1556" y="1724"/>
+				<point x="1556" y="1794"/>
+				<point x="687" y="1794"/>
+				<point x="687" y="1724"/>
+			</coords>
+		</text_region>
+		<text_region id="18" txt_orientation="90.000" txt_reading_orientation="90.000" txt_reading_direction="Left_To_Right" txt_type="Sentence" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="White">
+			<coords no_coords="4">
+				<point x="2192" y="895"/>
+				<point x="2192" y="1254"/>
+				<point x="2180" y="1254"/>
+				<point x="2180" y="895"/>
+			</coords>
+		</text_region>
+		<text_region id="19" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="2096" y="988"/>
+				<point x="2096" y="2248"/>
+				<point x="1660" y="2248"/>
+				<point x="1660" y="988"/>
+			</coords>
+		</text_region>
+		<text_region id="20" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="2104" y="2259"/>
+				<point x="2104" y="2812"/>
+				<point x="1662" y="2812"/>
+				<point x="1662" y="2259"/>
+			</coords>
+		</text_region>
+		<text_region id="21" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Sentence" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="2101" y="2817"/>
+				<point x="2101" y="2889"/>
+				<point x="1665" y="2889"/>
+				<point x="1665" y="2817"/>
+			</coords>
+		</text_region>
+		<separator_region id="22" sep_orientation="0.000" sep_colour="Black" sep_bgcolour="White">
+			<coords no_coords="4">
+				<point x="2178" y="2994"/>
+				<point x="2178" y="2997"/>
+				<point x="131" y="2997"/>
+				<point x="131" y="2994"/>
+			</coords>
+		</separator_region>
+		<noise_region id="23">
+			<coords no_coords="4">
+				<point x="2371" y="15"/>
+				<point x="2371" y="3139"/>
+				<point x="2223" y="3139"/>
+				<point x="2223" y="15"/>
+			</coords>
+		</noise_region>
+		<text_region id="24" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Drop_Capital" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="4">
+				<point x="284" y="1317"/>
+				<point x="284" y="1455"/>
+				<point x="206" y="1455"/>
+				<point x="206" y="1317"/>
+			</coords>
+		</text_region>
+		<text_region id="25" txt_orientation="0.000" txt_reading_orientation="0.000" txt_reading_direction="Left_To_Right" txt_type="Paragraph" txt_colour="Black" txt_reverse_video="No" txt_indented="No" txt_primary_language="English" txt_primary_script="Latin" txt_bgcolour="Blue">
+			<coords no_coords="6">
+				<point x="642" y="2056"/>
+				<point x="198" y="2056"/>
+				<point x="198" y="1467"/>
+				<point x="289" y="1467"/>
+				<point x="289" y="1308"/>
+				<point x="642" y="1308"/>
+			</coords>
+		</text_region>
+		<separator_region id="26" sep_orientation="90.000" sep_colour="Black" sep_bgcolour="White">
+			<coords no_coords="4">
+				<point x="1500" y="119"/>
+				<point x="1500" y="672"/>
+				<point x="1498" y="672"/>
+				<point x="1498" y="119"/>
+			</coords>
+		</separator_region>
+	</page>
+</document>

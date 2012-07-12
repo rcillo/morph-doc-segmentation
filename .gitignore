@@ -8,3 +8,7 @@ datasets/
 */*.mtc
 */*.mtc0
 8/\#*
+*/*.out
+icdar_competition
+training_data_images_generator/training_data
+training_data_images_generator/training_data_png
