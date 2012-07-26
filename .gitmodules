@@ -1,0 +1,3 @@
+[submodule "trioslib-code"]
+	path = trioslib-code
+	url = git://git.code.sf.net/p/trioslib/code
