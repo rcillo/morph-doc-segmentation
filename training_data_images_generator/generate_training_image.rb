@@ -36,7 +36,7 @@ root.each_element("//#{params['r']}") { |text_region|
 	}
 	
 	c.draw "polygon #{polygon}" 
-	c.fill("#0000FF") 
+	c.fill("#FFFFFF") 
 	
 }
 
