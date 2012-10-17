@@ -136,7 +136,7 @@ componentes estruturais.
 \label{fig:context1}
 \end{figure*}
 
-Segmentação de página refere-se à tarefa de separar os diferentes
+Segmentação de página refere-se à tarefa de separar e rotular os diferentes
 componentes que fazem parte da estrutura de uma dada página de
 documento, tais como: blocos de texto, gráficos, figuras, títulos,
 legendas, separadores, tabelas, fórmulas matemáticas e regiões com
@@ -166,16 +166,9 @@ Neste trabalho exploraremos a aplicabilidade de operadores
 morfológicos automaticamente gerados ao problema de segmentação de
 páginas.
 
-Este texto está organizado da seguinte forme. Na seção~\ref{sec:fundamentos},
+Este texto está organizado da seguinte forma. Na seção~\ref{sec:fundamentos},
 apresentamos as definições e conceitos básicos que serão importantes
 para a leitura deste texto.
-
-    %% A segmentação de páginas de documentos é uma etapa importante da análise de documentos pois nela é possível isolar um ou mais tipos específicos de conteúdo, tais como: blocos de texto, gráficos, imagens, títulos, legendas, separadores, tabelas, fórmulas matemáticas e regiões com ruído.
-
-    %% Diversas soluções computacionais foram propostas para o problema desde o surgimento do campo de pesquisa em visão computacional. Automatizar esta tarefa reduz custos, aumenta a velocidade e capacidade de processamento de documentos além de possivelmente reduzir a taxa de erro humano na classificação de uma região.
-
-    %% Quantificar a qualidade destas soluções e compará-las entre si tem sido o foco do ICDAR (International Conference on Document Analisys and Recognition) o qual estabelece métricas precisas e algoritmos para obtê-las. Utilizaremos os padrões adotados nestas competições para evitar qualquer forma de subjetividade na avaliação da qualidade da solução.
-
 
 \section{Fundamentos}
 \label{sec:fundamentos}
@@ -197,7 +190,7 @@ todas as imagens definidas em $\mathbb{E}$ por $K^{\mathbb{E}}$,
 
 
 \subsubsection{Segmentação de imagens}
-A segmentação de imagens é um processamento que é comum a praticamente
+A segmentação de imagens é um processamento comum a praticamente
 todos os processos que envolvem análise de imagens. Segmentar uma
 imagem corresponde a particionar o seu domínio, de forma que cada
 região resultante corresponda (do ponto de vista semântico) a uma
@@ -207,25 +200,117 @@ estruturais citados na introdução.
 
 \subsubsection{Binarização de imagens}
 
-A classe de operadores morfológicos estudados restringe-se ao domínio das imagens binárias $f: \mathbb{Z}^2 \to \{0,1\}$. Porém as imagens obtidas através de digitalização usualmente são coloridas, ou seja, são da forma $f: \mathbb{Z}^2 \to \mathbb{K}^3$, onde $\mathbb{K} = \{0, 1, \ldots, 255\}$ para imagens RGB com 24-bits de cor.
+A classe de operadores estudados restringe-se ao domínio das imagens binárias $f: \mathbb{Z}^2 \to \{0,1\}$. Porém as imagens obtidas através de digitalização usualmente são coloridas, ou seja, são da forma $f: \mathbb{Z}^2 \to \mathbb{K}^3$, onde $\mathbb{K} = \{0, 1, \ldots, 255\}$ para imagens RGB com 24-bits de cor.
 
-Este processo simplifica a imagem, ou seja, destrói informação. Esta perda pode comprometer todas as etapas subsequêntes caso não seja feita de forma apropriada.
+O processo de transformar uma imagem colorida em uma imagem binária simplifica a imagem, ou seja, destrói informação. Esta perda pode comprometer todas as etapas subsequêntes caso não seja feita de forma apropriada.
 
-Existem muitos algoritmos que realizam esta tarefa. Uma revisão extensa dos mais conhecidos métodos de binarização é apresentada em \cite{citeulike:890354}.
+Existem muitos algoritmos que realizam esta tarefa. Uma revisão extensa dos mais conhecidos métodos de binarização é apresentada em \cite{citeulike:890354}. Todos eles se aplicam a imagens em níveis de cinza, portante inicialmente transformaremos as imagem colorida $f$ em uma imagem em níveis de cinza $g$:
 
-Implementar e avaliar cada alternativa vai além do escopo deste trabalho, portanto escolhemos um bom algoritmo segundo os resultados obtidos por estudos como o citado acima. Como o próprio artigo aponta, não foi encontrado um método que apresentasse desempenho superior em todas os cenários de teste realizados.
+\begin{equation}
+  \begin{split}
+    t \colon f &\to g\\
+    \cr \{ R, G, B \} &\rightsquigarrow \frac{R + G + B}{3}
+  \end{split}
+\end{equation}
 
-Um requisito importante para a escolha foi o da não interferência humana na tarefa. Caso o algoritmo demandasse ajustes de acordo com a imagem, o seu uso comprometeria a promissa de automatização. Na literatura estudada é provado que a classe de algoritmos denominados de adaptabilidade local \TODO{ref} apresentam um desempenho superior no caso de imagens de texto. Porém requerem ajustes que levem em consideração o tamanho dos caracteres na imagem.
+Implementar e avaliar cada algoritmo binarizador vai além do escopo deste trabalho, portanto escolhemos um bom algoritmo segundo os resultados obtidos por estudos como o citado acima. Como o próprio artigo aponta, não foi encontrado um método que apresentasse desempenho superior em todas os cenários de teste realizados.
 
-Já outros métodos, como o de Otsu \TODO{ref}, dispensam a necessidade de se definir qualquer parâmetro de antemão. Porém os resultados podém ser ruins no caso de imagens com algum tipo de degradê devido a sombreamento. \TODO{imagem de exemplo}.
+Os requisitos para a escolha foram o da independência de supervisionamento e parametrização. Caso o algoritmo demandasse ajustes específicos de acordo com a imagem, o seu uso comprometeria a promissa de automatização. Dentre a lista de soluções com esta característica, escolhemos o algoritmo de Otsu, por ser de fácil implementação e apresentar resultados satisfatórios nos experimentos realizados.
 
-A tabela abaixo apresenta um comparativo entre os métodos testados:
+\subsubsection{Algoritmo de Otsu para binarização}
 
-\TODO{incluir tabela}
+O algoritmo de Otsu \cite{1979:ots} identifica um nível de cinza $t$ tal que a soma ponderada da variância dentro das classes $f = \{ x \colon f(x) \geq t \}$ (foreground) e background $b = \{ x \colon f(x) < t \}$ (background) seja minimizada, ou seja,
 
-Testamos o resultado final utilizando cada um dos métodos listados na tabela e o que obteve o melhor desempenho foi \TODO{ainda não sei}.
+\begin{equation}
+  t = arg max \{ w_b \sigma^{2}_{b} + w_f \sigma^{2}_{f} \}
+\end{equation}
 
-\TODO{gostaria de testar um algoritmo de sharpening antes da binarização. Acho q isto pode suavizar as fontes.}
+onde $w_b = \frac{|b|}{|E|}$ e $\sigma^{2}_{b}$ é a variância.
+
+Abaixo apresentamos um passo a passo do algoritmo aplicado a uma imagem da letra h.
+
+\begin{center}
+\begin{tabular}[p]{@{}ccccccc@{}}
+  \centering
+
+  original & 25\% & 37,5\% & 50\% & 62,5\% & 75\% & 87,5\% \\
+
+  % Imagem original e respectivo histograma
+  \includegraphics[width=0.05\textwidth]{assets/binarization/gray3_big.png}
+  &
+  \includegraphics[width=0.05\textwidth]{assets/binarization/h25t.png}
+  &
+  \includegraphics[width=0.05\textwidth]{assets/binarization/h38t.png}
+  &
+  \includegraphics[width=0.05\textwidth]{assets/binarization/h50t.png}
+  &
+  \includegraphics[width=0.05\textwidth]{assets/binarization/h63t.png}
+  &
+  \includegraphics[width=0.05\textwidth]{assets/binarization/h75t.png}
+  &
+  \includegraphics[width=0.05\textwidth]{assets/binarization/h88t.png}
+  \\
+
+  % histogramas
+
+  \includegraphics[scale=0.4]{assets/binarization/3bit_hist.png}
+  &
+  \includegraphics[scale=0.4]{assets/binarization/13hist.png}
+  &
+  \includegraphics[scale=0.4]{assets/binarization/25hist.png}
+  &
+  \includegraphics[scale=0.4]{assets/binarization/50hist.png}
+  &
+  \includegraphics[scale=0.4]{assets/binarization/63hist.png}
+  &
+  \includegraphics[scale=0.4]{assets/binarization/75hist.png}
+  &
+  \includegraphics[scale=0.4]{assets/binarization/88hist.png}
+
+  \\
+  % peso do background
+  $w_b$ & 0.1931 & 0.4015 & 0.4179 & 0.4532 & 0.5479 & 0.6969 \\
+
+  % média do background
+  $\mu_b$ & 34.00 & 51.64 & 53.61 & 61.37 & 83.08 & 112.56 \\
+
+  % variância do background
+  $\sigma^{2}_{b}$ & 7.27 & 288.58 & 372.94 & 1054.08 & 3128.03 & 5656.37 \\
+
+  % peso do foreground
+  $w_{f}$ & 0.80 & 0.59 & 0.58 & 0.54 & 0.45 & 0.30 \\
+
+  % média do foreground
+  $\mu_{f}$ & 184.87 & 225.55 & 229.03 & 233.95 & 243.79 & 255.0 \\
+
+  % variância do foreground
+  $\sigma^{2}_{f}$ & 5799.89 & 1409.01 & 1006.11 & 673.10 & 255.43 & 0.0 \\
+
+  % variância intra-classe
+  $\sigma^{2}_{w}$ & 21495165144 & 967521582 & 512693389 & 595067475 & 4269882800 & 17660993341 \\
+
+
+\end{tabular}
+\end{center}
+
+Como podemos notar, para $t = 50\%$ atingimos o menor valor de $\sigma^{2}_{w} \approx 512693389$. Neste caso específico podemos notar que este limiar coincide com o vale no histograma, porém nem sempre podemos considerar que o histograma possuirá um único vale. Este algoritmo não se baseia no formato do histograma mas sim na coesão intra classe e na separabilidade das classes.
+
+% 
+% Usei o imagemagick para criar uma imagem em tons de cinza com a quantidade de níveis desejado, usando o seguinte comando
+% 
+% convert -type Grayscale -depth 3 h8rgb.png h_3grayscale.png
+% 
+% Posteriormente gerei imagens com threshold em diferentes níveis
+% 
+% convert -threshold 60% h_3grayscale.png h60t.png
+% 
+% o comando identify -verbose mostra o histograma
+% 
+% Usei o gráfico do site http://www.labbookpages.co.uk/software/imgProc/otsuThreshold.html como exemplo
+% 
+% binarizado com ../otsuthresh -g save h_3grayscale.png bin.gif
+% 
+
 
 \subsection{Classificação de objetos}
 
