@@ -27,18 +27,27 @@ root = doc.root
 
 img = MiniMagick::Image.open(params["i"]) 
 
+region_selector = "//#{params['r']}"
+unless params["t"].nil?
+	region_selector += "[@type=\'#{params['t']}\']"
+end
+
+puts "selector => #{region_selector}"
+
 img.combine_options do |c| 
 
-root.each_element("//#{params['r']}") { |text_region|
-	polygon = ""
-	text_region.each_element('coords/point') { |point|
-		polygon = polygon + " #{point.attributes['x']},#{point.attributes['y']}"
+	root.each_element(region_selector) { |text_region|
+		polygon = ""
+		text_region.each_element('Coords/Point') { |point|
+			polygon = polygon + " #{point.attributes['x']},#{point.attributes['y']}"
+		}
+
+		puts "draw polygon #{polygon}"
+		
+		c.draw "polygon #{polygon}" 
+		c.fill("#FFFFFF") 
+		
 	}
-	
-	c.draw "polygon #{polygon}" 
-	c.fill("#FFFFFF") 
-	
-}
 
 end
 
