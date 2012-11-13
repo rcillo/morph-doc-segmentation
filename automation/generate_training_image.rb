@@ -44,7 +44,7 @@ img.combine_options do |c|
 
 		puts "draw polygon #{polygon}"
 		
-		c.draw "polygon #{polygon}" 
+		c.draw "polygon #{polygon}"
 		c.fill("#FFFFFF") 
 		
 	}

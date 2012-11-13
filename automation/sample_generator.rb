@@ -17,7 +17,7 @@ root_dir = params["root_dir"]
 dest_dir = params["dest_dir"]
 otsu_path = params["otsu"]
 
-variations = ["MathsRegion", "ChartRegion", "ImageRegion", "NoiseRegion", "SeparatorRegion", "TextRegion_credits", "TextRegion_drop-capital", "TextRegion_footer", "TextRegion_heading", "TextRegion_page-number", "TextRegion_paragraph"]
+variations = ["GraphicRegion", "MathsRegion", "ChartRegion", "ImageRegion", "NoiseRegion", "SeparatorRegion", "TextRegion_credit", "TextRegion_drop-capital", "TextRegion_footer", "TextRegion_heading", "TextRegion_page-number", "TextRegion_paragraph", "TextRegion_caption", "TextRegion_floating"]
 
 FileUtils.mkdir(dest_dir) unless Dir.exists?(dest_dir)
 
@@ -45,7 +45,7 @@ Dir.foreach(root_dir) do |f|
         type = "-t #{variation.split('_')[1]}"
       end
       region = variation.split('_')[0]
-      generate_cmd = "./generate_training_image.rb -i #{black_and_white_dir}/#{pgm_filename} -o #{variation_dir}/#{pgm_filename} -r #{region} #{type} -xml #{xml_path}"
+      generate_cmd = "./generate_training_image_filling.rb -i #{black_and_white_dir}/#{pgm_filename} -o #{variation_dir}/#{pgm_filename} -r #{region} #{type} -xml #{xml_path}"
       puts generate_cmd
       system(generate_cmd)
     end

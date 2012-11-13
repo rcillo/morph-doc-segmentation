@@ -4,20 +4,17 @@ require 'scanf'
 
 trios_toolbox_path = "/Users/rcillo/tcc/trios/bin/bin/"
 
-puts "window dimension 'w,h' format:"
-w, h = gets.scanf("%d,%d")
+# puts "window filename:"
+win_filename = ARGV[0]
 
-puts "imgset:"
+# puts "imgset:"
 # example: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/math_expressions.s
-imgset = gets
+imgset = ARGV[1]
 
-base = "win#{w}x#{h}"
-win_filename = "#{base}.w"
+base = win_filename.sub(/\.w/, "")
 itv_filename = "#{base}.itv"
 mtm_filename = "#{base}.mtm"
 xpl_filename = "#{base}.xpl"
-
-system("#{trios_toolbox_path}win_create -d #{w},#{h} > #{win_filename}")
 
 system("#{trios_toolbox_path}win2itv -o #{itv_filename} < #{win_filename}")
 
