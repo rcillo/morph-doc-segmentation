@@ -4,6 +4,10 @@ Este projeto contém todo o material produzido durante a disciplina de conclusã
 
 ## Organização
 
+* automation: scripts para execução dos testes
+* binarization: algoritmos binarizadores
+* poster
+* presentation: apresentação
 * monografia: contém a monografia. Pretendo manter uma versão atualizada do .pdf além de todo o fonte em .tex e demais arquivos necessários para gerá-la.
 * proposta: proposta de trabalho apresentada no início da disciplina.
 * siicusp: arquivos entregues ao SIICUSP. O trabalho foi aceito e será apresentado em outubro.
