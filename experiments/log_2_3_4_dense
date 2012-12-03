@@ -1,0 +1,248 @@
+
+
+
+
+###MAES
+
+
+
+2 training: one_third region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+2 training: two_thirds region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+2 training: full region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+2 training: one_third region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.012606
+2 training: two_thirds region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.012606
+2 training: full region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.012606
+2 training: one_third region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.016375
+2 training: two_thirds region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.016375
+2 training: full region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.016375
+3 training: one_third region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+3 training: two_thirds region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+3 training: full region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+3 training: one_third region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.012606
+3 training: two_thirds region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.012606
+3 training: full region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.012606
+3 training: one_third region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.016375
+3 training: two_thirds region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.016375
+3 training: full region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.016375
+4 training: one_third region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+4 training: two_thirds region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+4 training: full region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+4 training: one_third region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.011975
+4 training: two_thirds region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.011975
+4 training: full region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.011943
+4 training: one_third region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.015481
+4 training: two_thirds region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.015481
+4 training: full region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.015248
+
+
+
+
+###MAES
+
+
+
+2 training: one_third region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008723
+2 training: two_thirds region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008723
+2 training: full region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008723
+2 training: one_third region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012511
+2 training: two_thirds region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012511
+2 training: full region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012511
+2 training: one_third region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.035151
+2 training: two_thirds region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.034676
+2 training: full region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.034676
+3 training: one_third region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008723
+3 training: two_thirds region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008723
+3 training: full region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008722
+3 training: one_third region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012511
+3 training: two_thirds region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012511
+3 training: full region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012511
+3 training: one_third region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.019851
+3 training: two_thirds region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.019832
+3 training: full region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.019830
+4 training: one_third region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008719
+4 training: two_thirds region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008719
+4 training: full region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008676
+4 training: one_third region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012516
+4 training: two_thirds region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012512
+4 training: full region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012497
+4 training: one_third region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.011582
+4 training: two_thirds region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.011505
+4 training: full region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.011467
+
+
+
+
+###MAES
+
+
+
+2 training: one_third region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.064509
+2 training: two_thirds region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.064530
+2 training: full region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.064509
+2 training: one_third region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+2 training: two_thirds region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+2 training: full region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+2 training: one_third region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.045984
+2 training: two_thirds region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.045984
+2 training: full region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.045984
+3 training: one_third region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.042279
+3 training: two_thirds region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.042004
+3 training: full region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.041891
+3 training: one_third region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+3 training: two_thirds region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+3 training: full region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+3 training: one_third region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.030481
+3 training: two_thirds region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.029848
+3 training: full region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.029809
+4 training: one_third region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.029461
+4 training: two_thirds region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.028373
+4 training: full region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.028167
+4 training: one_third region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+4 training: two_thirds region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009192
+4 training: full region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009065
+4 training: one_third region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.020195
+4 training: two_thirds region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.019698
+4 training: full region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.019538
+
+
+
+
+###MAES
+
+
+
+2 training: one_third region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.063845
+2 training: two_thirds region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.063845
+2 training: full region: ImageRegion
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.063845
+2 training: one_third region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+2 training: two_thirds region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+2 training: full region: TextRegion_heading
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+2 training: one_third region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.037948
+2 training: two_thirds region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.037948
+2 training: full region: TextRegion_paragraph
+win: 4 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.037948
+3 training: one_third region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.048757
+3 training: two_thirds region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.048743
+3 training: full region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.048670
+3 training: one_third region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+3 training: two_thirds region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+3 training: full region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+3 training: one_third region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.027518
+3 training: two_thirds region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.027622
+3 training: full region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.027431
+4 training: one_third region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.038034
+4 training: two_thirds region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.038040
+4 training: full region: ImageRegion
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.037833
+4 training: one_third region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013201
+4 training: two_thirds region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013199
+4 training: full region: TextRegion_heading
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013184
+4 training: one_third region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.018039
+4 training: two_thirds region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.017966
+4 training: full region: TextRegion_paragraph
+win: 16 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.017856

@@ -1,0 +1,500 @@
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_one_third.mtm
+error 0.000000
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_two_thirds.mtm
+error 0.000000
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_full.mtm
+error 0.000000
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_ImageRegion_full_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_one_third.mtm
+error 0.012560
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_two_thirds.mtm
+error 0.012560
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_full.mtm
+error 0.008784
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_heading_full_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_one_third.mtm
+error 0.016196
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_two_thirds.mtm
+error 0.016196
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_full.mtm
+error 0.011849
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/5x5_TextRegion_paragraph_full_min.itv
+
+
+
+
+###MAES
+
+
+
+5 training: one_third region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+5 training: two_thirds region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+5 training: full region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_ImageRegion_full.s mae: 0.000000
+5 training: one_third region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.008956
+5 training: two_thirds region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.008956
+5 training: full region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_heading_full.s mae: 0.008784
+5 training: one_third region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.012046
+5 training: two_thirds region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.012046
+5 training: full region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/ieee/imgset_TextRegion_paragraph_full.s mae: 0.011849
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_one_third.mtm
+error 0.013547
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_two_thirds.mtm
+error 0.006788
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_full.mtm
+error 0.008709
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_ImageRegion_full_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_one_third.mtm
+error 0.011878
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_two_thirds.mtm
+error 0.014752
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_full.mtm
+error 0.012511
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_heading_full_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_one_third.mtm
+error 0.010113
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_two_thirds.mtm
+error 0.008798
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_full.mtm
+error 0.008434
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/5x5_TextRegion_paragraph_full_min.itv
+
+
+
+
+###MAES
+
+
+
+5 training: one_third region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008723
+5 training: two_thirds region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008723
+5 training: full region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_ImageRegion_full.s mae: 0.008709
+5 training: one_third region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012512
+5 training: two_thirds region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012511
+5 training: full region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_heading_full.s mae: 0.012511
+5 training: one_third region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.008540
+5 training: two_thirds region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.008744
+5 training: full region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/cacm/imgset_TextRegion_paragraph_full.s mae: 0.008434
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_one_third.mtm
+error 0.037146
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_two_thirds.mtm
+error 0.029479
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_full.mtm
+error 0.025990
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_ImageRegion_full_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_one_third.mtm
+error 0.007637
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_two_thirds.mtm
+error 0.010884
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_full.mtm
+error 0.009069
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_heading_full_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_one_third.mtm
+error 0.014995
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_two_thirds.mtm
+error 0.016782
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_full.mtm
+error 0.018426
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/5x5_TextRegion_paragraph_full_min.itv
+
+
+
+
+###MAES
+
+
+
+5 training: one_third region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.026994
+5 training: two_thirds region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.026031
+5 training: full region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_ImageRegion_full.s mae: 0.025990
+5 training: one_third region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+5 training: two_thirds region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+5 training: full region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_heading_full.s mae: 0.009069
+5 training: one_third region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.019196
+5 training: two_thirds region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.018512
+5 training: full region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/time/imgset_TextRegion_paragraph_full.s mae: 0.018426
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_one_third.mtm
+error 0.034440
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_two_thirds.mtm
+error 0.033471
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_full.mtm
+error 0.035941
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_ImageRegion_full_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_one_third.mtm
+error 0.007805
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_two_thirds.mtm
+error 0.010485
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_full.mtm
+error 0.013187
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_heading_full_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_one_third.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_one_third.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_one_third.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_one_third.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_one_third.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_one_third.mtm
+error 0.017514
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_one_third.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_one_third.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_one_third_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_two_thirds.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_two_thirds.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_two_thirds.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_two_thirds.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_two_thirds.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_two_thirds.mtm
+error 0.015718
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_two_thirds.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_two_thirds.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_two_thirds_min.itv
+gerando intervalos
+/Users/rcillo/tcc/trios/bin/bin/win2itv -o /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_full.itv < /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w
+coletando
+/Users/rcillo/tcc/trios/bin/bin/collect -win /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_full.xpl -imgset /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s
+decision
+/Users/rcillo/tcc/trios/bin/bin/decision -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_full.mtm -xpl /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_full.xpl
+mae
+/Users/rcillo/tcc/trios/bin/bin/mae -w /Users/rcillo/tcc/experiments/icdar_2009/windows/sparse/5x5.w -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_full.mtm
+error 0.016815
+isi
+/Users/rcillo/tcc/trios/bin/bin/isi -mtm /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_full.mtm -itv_original /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_full.itv -itv_min /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/5x5_TextRegion_paragraph_full_min.itv
+
+
+
+
+###MAES
+
+
+
+5 training: one_third region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.035996
+5 training: two_thirds region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.035955
+5 training: full region: ImageRegion
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_ImageRegion_full.s mae: 0.035941
+5 training: one_third region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+5 training: two_thirds region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+5 training: full region: TextRegion_heading
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_heading_full.s mae: 0.013187
+5 training: one_third region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.016961
+5 training: two_thirds region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.016980
+5 training: full region: TextRegion_paragraph
+win: 9 imgset: /Users/rcillo/tcc/experiments/icdar_2009/imgsets/fortune/imgset_TextRegion_paragraph_full.s mae: 0.016815
