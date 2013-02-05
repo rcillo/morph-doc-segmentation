@@ -12,7 +12,8 @@ $pubs = {
   "ieee" => [701, 792, 801],
   "cacm" => [263, 674, 677, 680, 683, 685, 686, 689, 692, 695, 802, 803],
   "time" => [232, 720, 721, 723, 782, 783, 784, 785, 786],
-  "fortune" => [158, 235, 246, 249, 734, 752, 776]
+  "fortune" => [158, 235, 246, 249, 734, 752, 776],
+  "mixed" => [701,263,801,683,232,723,158,249]
 }
 
 $training_sizes = {
@@ -21,7 +22,7 @@ $training_sizes = {
   "full" => 1.0
 }
 
-$win_sizes = ARGV[0].split(",").map(&:to_i)
+$win_sizes = [[3,3], [4,4], [5,5]]
 
 $regions = ["ImageRegion", "TextRegion_heading", "TextRegion_paragraph"]
 

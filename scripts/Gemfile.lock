@@ -1,0 +1,17 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    fileutils (0.7)
+      rmagick (>= 2.13.1)
+    mini_magick (3.4)
+      subexec (~> 0.2.1)
+    rmagick (2.13.1)
+    subexec (0.2.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  fileutils
+  mini_magick (= 3.4)
+  rmagick

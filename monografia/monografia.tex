@@ -113,11 +113,12 @@ São Paulo, \today
 \end{center}
 
 
+\newpage
+
+\tableofcontents
 
 \newpage
 \setcounter{page}{1}
-
-
 
 \section{Introdução}
 
@@ -342,247 +343,95 @@ As configurações observadas na etapa anterior possuirão valores relacionados 
 
 \section{Metodologia}
 
-O método empregado para resolver o problema é baseado em operadores morfológicos automaticamente gerados. Os dados de entrada são um conjunto de imagens de treinamento e um XML com a descrição do tipo e forma das regiões. A seguir realizamos a seguinte sequência de etapas: 
+O método proposto é baseado em operadores morfológicos automaticamente gerados, ou seja, construímos um segmentador genérico a partir de alguns exemplos de segmentação (pares de imagens). A seguir detalhamos cada uma das etapas envolvidas.
 
     \begin{enumerate}
-      \item Aquisição das imagens de treinamento
-      \item Binarização
-      \item Geração dos pares de imagens de treinamento
-      \item Construção do operador segmentador específico para o tipo de região especificada
-      \item Aplicação do operador em um conjunto de imagens
+      \item Preparação das imagens de treinamento
+      \item Construção dos operadores
+      \item Aplicação dos operadores
+      \item Consensualização
     \end{enumerate}
 
-    Cada um dos passos é detalhado nas seções seguintes.
+    \subsection{Preparação das imagens de treinamento}
 
-    \subsection{Aquisição das imagens de treinamento}
+      O primeiro passo consiste na produção dos pares de imagens de treinamento. Estes pares consistem da imagem original binarizada e de sua variante segmentada.
 
-      As imagens utilizadas nos experimentos foram obtidas de um banco de dados construído pelos pesquisadores do PRImA ao longo de anos \TODO{ref}. Ele inclui um conjunto de documentos que busca simular um cenário realístico de trabalho, com layouts complexos e diferentes tipos de fontes e formatos de regiões. Isto é importante para avaliar a aplicabilidade do método em situações práticas, onde um controle sobre o formato do conteúdo seria indesejável ou inviável.
+      Para cada imagem original geramos $n$ pares de exemplo, sendo $n$ o número de tipos de regiões que desejamos segmentar. No caso deste trabalho nos limitamos a três: texto, título e citação.
 
-      No artigo [A Realistic Dataset for Performance Evaluation of Document Layout Analysis] de 2009, os autores apresentam um conjunto de dados com páginas de revistas, artigos científicos diversos, documentos modernos e não apenas históricos.
+      A variante segmentada pode ser obtida através de duas estratégias: preservação ou preenchimento da região de interesse. A imagem *exemplos de treinamento* ilustra a geração das imagens de exemplos usando as duas estratégias.
 
-      O conjunto de dados contém não só imagens mas também arquivos XML [The PAGE (Page Analysis and Ground-truth Elements) Format Framework] com metadados como informações bibliográficas (título, autor, publicação), informações das imagens (resolução, bit depth, modelo do scanner), características do layout (número de colunas, variadade de tamanhos de fontes) e informações administrativas (direitos autorais).
+      \TODO{*exemplos de treinamento*}
 
-      Os documentos são digitalizados com um cartão escuro por trás para minimizar a exposição da contra página. Posteriormente um algoritmo analisa possíveis falhas, como rotação do documento, marcando-os para redigitalização. Uma correção automática não é utilizada pois isto pode comprometer a qualidade da imagem.
+      \TODO{Falar sobre binarização em uma seção sobre o dataset e pré-processamentos}
 
-      Uma vez que a imagem foi aceita no banco de dados, inicia-se um processo manual de marcação do grownd-truth. Este trabalho deve ser realizado da forma mais precisa possível pois é a base para determinar a corretude dos algoritmos segmentadores. Por se tratar de uma etapa muito custosa, uma ferramenta semi-automática chamada Aletheia é utilizada para agilizar o processo. Esta ferramenta permite a uma pessoa desenhar uma região poligonal em torno de uma região de interesse. Em seguida esta região é automaticamate ajustada pelo software, como se a pessoa estivesse colocando um elástico que aperta a região.
+    \subsection{Construção dos operadores}
 
-      As imagens utilizadas para exemplificação nesta monografia não são as mesmas do banco de dados referido por limitações de licença.
+      O algoritmo gerador de operadores morfológicos recebe como entrada um conjunto de pares de imagens de exemplo do passo anterior. Treinamos um operador para cada tipo de região utilizando a biblioteca TRIOS \TODO{ref}. Os parâmetros para o treinamento foram ajustados experimentalmente \TODO{ref experimentos}.
 
-    \subsection{Algoritmo de Otsu para binarização}
+      \TODO{Imagem com 2 a 3 pares de exemplos de segmentação de texto para treinamento de um operador}
 
-      Implementar e avaliar cada algoritmo binarizador vai além do escopo deste trabalho, portanto escolhemos um bom algoritmo segundo os resultados obtidos em \cite{citeulike:890354}. Como o próprio artigo aponta, não foi encontrado um método que apresentasse desempenho superior em todas os cenários de teste realizados.
+    \subsection{Aplicação dos operadores}
 
-      Os requisitos para a escolha foram o da independência de supervisionamento e parametrização. Caso o algoritmo demandasse ajustes específicos de acordo com a imagem, o seu uso comprometeria a promissa de automatização. Dentre a lista de soluções com esta característica, escolhemos o algoritmo de Otsu \cite{1979:ots}, por ser de fácil implementação e apresentar resultados satisfatórios nos experimentos realizados.
+      Construidos os operadores para cada tipo de região, aplicamos todos os operadores às imagens que desejamos segmentar obtendo um resultado para cada operador. Sendo $n$ operadores e $m$ imagens, obtemos $nm$ resultados.
 
-      O algoritmo de Otsu encontra um nível de cinza $t$ tal que a soma ponderada da variância dentro das classes $\mathbb{F} = \{ x \colon f(x) \geq t \}$ (foreground) e $\mathbb{B} = \{ x \colon f(x) < t \}$ (background) seja minimizada, ou seja,
+      \TODO{exemplo de aplicação de $n$ operadores}
 
-      \begin{equation}
-        t = argmin \{ w_\mathbb{B} \sigma^{2}_{\mathbb{B}} + w_\mathbb{F} \sigma^{2}_{\mathbb{F}} \}
-      \end{equation}
+    \subsection{Consensualização}
 
-      onde $w_\mathbb{B} = \frac{|\mathbb{B}|}{|E|}$ e $w_f = \frac{|\mathbb{F}|}{|E|}$ são os pesos respectivamente do background e foreground e $\sigma^{2}_{\mathbb{B}}$ e $\sigma^{2}_{\mathbb{F}}$ são as variâncias das classes.
+      A aplicação de operadores diferentes à mesma imagem pode gerar resultados incoerentes. Pixels classificados como pertencentes a mais de uma região fazem com que a união dos resultados seja impossível sem nenhum tipo de processamento. Para concluirmos a segmentação é necessário chegar a um consenso sobre qual operador possui a maior probabilidade de estar certo a cada pixel de classificação conflitante.
 
-      A tabela \ref{tab:otsu} apresenta um passo a passo do algoritmo aplicado à figura \ref{fig:letrah}.
+      Partindo da observação de que pixel pertencente a uma certa região costuma estar cercados por pixels da mesma região, aplicamos um processo de escolha por maior contagem de pixels na vizinhança. Ou seja, se houver um conflito de classificação de um pixel entre texto ou título, conta-se quantos pixels na vizinhança pertencem a uma dada região e a que obtiver maior contagem ganha.
 
-      \begin{figure*}[htb]
-        \begin{center}
-          \includegraphics[width=0.5\textwidth]{assets/binarization/h_3grayscale_big.png}
-          \end{center}
-        \caption{Imagem digitalizada de uma letra H obtida de uma revista.}
-        \label{fig:letrah}
-      \end{figure*}
+      \TODO{Exemplo de conflito e contagem para consenso}
 
-      \begin{center}
+\section{Experimentos}
 
-      \begin{table}
-        \caption{Estágios da execução do algoritmo de Otsu.}
-        \begin{tabular}[p]{@{}ccccccc@{}}
-          \centering
+  Realizamos experimentos com diferentes publicações, quantidade de regiões, quantidade de imagens de treinamento, diferentes parâmetros do TRIOS como tamanhos e formas de janela, e tamanhos de janelas na etapa de consensualização.
 
-          original & 25\% & 37,5\% & 50\% & 62,5\% & 75\% & 87,5\% \\
+  \subsection{Agrupamento de publicações}
 
-          % Imagem original e respectivo histograma
-          \includegraphics[width=0.05\textwidth]{assets/binarization/gray3_big.png}
-          &
-          \includegraphics[width=0.05\textwidth]{assets/binarization/h25t.png}
-          &
-          \includegraphics[width=0.05\textwidth]{assets/binarization/h38t.png}
-          &
-          \includegraphics[width=0.05\textwidth]{assets/binarization/h50t.png}
-          &
-          \includegraphics[width=0.05\textwidth]{assets/binarization/h63t.png}
-          &
-          \includegraphics[width=0.05\textwidth]{assets/binarization/h75t.png}
-          &
-          \includegraphics[width=0.05\textwidth]{assets/binarization/h88t.png}
-          \\
+    Neste experimento medimos o desempenho do método quando aplicado a conjuntos de imagens de publicações diferentes ou apenas de uma única publicação. Diferentes publicações possuem diferentes tipos de regiões, utilizam famílias de fontes e tamanhos diferentes.
 
-          % histogramas
+    \begin{itemize}
+      \item CACM
+      \item FORTUNE
+      \item IEEE
+      \item TIME
+      \item MIX
+    \end{itemize}
 
-          \includegraphics[scale=0.4]{assets/binarization/3bit_hist.png}
-          &
-          \includegraphics[scale=0.4]{assets/binarization/13hist.png}
-          &
-          \includegraphics[scale=0.4]{assets/binarization/25hist.png}
-          &
-          \includegraphics[scale=0.4]{assets/binarization/50hist.png}
-          &
-          \includegraphics[scale=0.4]{assets/binarization/63hist.png}
-          &
-          \includegraphics[scale=0.4]{assets/binarization/75hist.png}
-          &
-          \includegraphics[scale=0.4]{assets/binarization/88hist.png}
+    \TODO{mostra imagens de revistas com fontes bem diferentes}
 
-          \\
-          % peso do background
-          $w_\mathbb{B}$ & 0.1931 & 0.4015 & 0.4179 & 0.4532 & 0.5479 & 0.6969 \\
+  \subsection{Quantidade de imagens de treinamento}
 
-          % média do background
-          $\mu_\mathbb{B}$ & 34.00 & 51.64 & 53.61 & 61.37 & 83.08 & 112.56 \\
+    Medimos a sensibilidade do método à quantidade de imagens de treinamento. Analisamos separadamente a redução na taxa de erro de classificação por tipo de região.
 
-          % variância do background
-          $\sigma^{2}_{\mathbb{B}}$ & 7.27 & 288.58 & 372.94 & 1054.08 & 3128.03 & 5656.37 \\
+    \begin{itemize}
+      \item 1/3
+      \item 2/3
+      \item full
+    \end{itemize}
 
-          % peso do foreground
-          $w_{\mathbb{F}}$ & 0.80 & 0.59 & 0.58 & 0.54 & 0.45 & 0.30 \\
+  \subsection{Tamanho da janela}
 
-          % média do foreground
-          $\mu_{\mathbb{F}}$ & 184.87 & 225.55 & 229.03 & 233.95 & 243.79 & 255.0 \\
+    Variando o tamanho da janela procuramos capturar padrões característicos de cada tipo de região. No caso de títulos precisamos de janelas maiores porém não necessariamente densas ou no caso de textos precisamos de janelas menores, verticais e densas. Realizamos testes com as seguintes janelas:
 
-          % variância do foreground
-          $\sigma^{2}_{\mathbb{F}}$ & 5799.89 & 1409.01 & 1006.11 & 673.10 & 255.43 & 0.0 \\
+    \TODO{imagens das janelas}
 
-          % variância intra-classe
-          $\sigma^{2}_{w}$ & 21495165144 & 967521582 & 512693389 & 595067475 & 4269882800 & 17660993341 \\
+  \subsection{Tamanho da janela de consensualização}
 
-          \label{tab:otsu}
-        \end{tabular}
-      \end{table}
-      \end{center}
+    Apenas um pixel de diâmetro ou 50?
 
-      Como podemos notar, para $t = 50\%$ atingimos o menor valor de $\sigma^{2}_{w} \approx 512693389$. Neste caso o limiar coincide com o único vale no histograma, porém isto nem sempre será válido. Algumas imagens não possuem vales bem definidos. Este algoritmo não se baseia no formato do histograma mas sim na coesão intra classe e na separabilidade das classes.
+\section{Resultados}
 
-      \begin{figure*}[htb]
-        \begin{center}
-          \includegraphics[width=0.5\textwidth]{assets/binarization/bin_big.png}
-          \end{center}
-        \caption{Imagem binarizada com $t = 50\%.$}
-        \label{fig:letrah_bin}
-      \end{figure*}
+  \TODO{Medir MAE}
 
-      Uma desvantagem de utilizar este algoritmo é a influência da média de todo os pixels da imagem. Isto pode fazer com que o limiar ótimo para a página toda não seja o mesmo que o de dentro de uma janela.
+  \TODO{Medir f-score}
 
-      % 
-      % Usei o imagemagick para criar uma imagem em tons de cinza com a quantidade de níveis desejado, usando o seguinte comando
-      % 
-      % convert -type Grayscale -depth 3 h8rgb.png h_3grayscale.png
-      % 
-      % Posteriormente gerei imagens com threshold em diferentes níveis
-      % 
-      % convert -threshold 60% h_3grayscale.png h60t.png
-      % 
-      % o comando identify -verbose mostra o histograma
-      % 
-      % Usei o gráfico do site http://www.labbookpages.co.uk/software/imgProc/otsuThreshold.html como exemplo
-      % 
-      % binarizado com ../otsuthresh -g save h_3grayscale.png bin.gif
-      % 
-
-    \subsection{Construção do operador}
-
-      O algoritmo gerador de operadores morfológicos recebe como entrada duas imagens, uma é chamada de original e consiste da imagem branco e preto resultante da binarização e a segunda, chamada de alvo, é uma transformação da imagem original. Esta transformação é feita manualmente e procura demonstrar o conceito de segmentação para o algoritmo de treinamento.
-
-      % não sei se em algum momento devo apresentar uma definição mais formal de machine learning. Me lembro de ter lido algo na tese. Era complicado.
-
-      De posse apenas da imagem original, devemos gerar a imagem de destino aplicando uma transformação adequada. Neste ponto exploraremos algumas estratégias diferentes revelando pontos positivos e negativos de se usar esta abordagem.
-
-      \subsubsection{Apagar área de interesse}
-
-        Nossa primeira estratégia foi apagar as regiões indicadas, pintando-as de branco. Partindo da premissa de que o operador gerado seria o ótimo para este tipo de transformação, poderíamos obter os pixels em regiões do tipo especificado ao fazer a diferença entre a imagem de entrada e a de saída.
-
-      \subsubsection{Pintar área de interesse}
-
-        Preenchemos todos os pixels das regiões indicadas, pintando-a completamente. Apagamos todos os demais. Desta forma poderíamos produzir componentes conexos com os pixels de uma certa região.
-
-      \subsubsection{Manter apenas área de interesse}
-
-        Apagamos toda a imagem exceto a região de interesse. Desta forma procuramos construir um operador preserve apenas os pixels da área de interesse, porém sem aglutiná-los, como na estratégia anterior.
-
-      \subsubsection{Aprendizado iterativo}
-
-        No caso de a abordagem anterior gerar um operador cujo MAE seja insatisfatório, podemos gerar outro operador a partir da imagem processada e a imagem ideal, novamente. Esta técnica funciona como um reforço.
-
-      \subsubsection{Diminuir resolução}
-
-        Reduzimos a resolução da imagem reduzindo a complexidade das formas e o tempo de processamento para construção do operador. Esta técnica é especialmente útil para o tratamento de títulos.
-
-    \subsection{Pós processamento}
-
-      O operador gerado na etapa anterior é uma aproximação de um operador considerado ideal. A aplicação deste operador produz resultados considerados sub ótimos. Após realizar experimentar com as diferentes estratégias citadas anteriormente e também com diferentes tamanhos de janela, observamos que as imagens produzidas poderiam ser melhoradas com técnicas simples.
-
-      Buscando complementar a transformação, adicionamos mais alguns passos, descritos a seguir.
-
-      \subsubsection{Reconstrução de pixels na área de interesse parcialmente apagada}
-
-        Caso o operador apague alguns pixels de uma componente conexa, mas não apague a componente toda, recuperamos a componente a partir dos pixels restantes e da imagem original.
-
-      \subsubsection{Unir pixels de uma região em componentes conexas}
-
-        Para facilitar a definição do polígono que envolve uma região, aplicamos um operador que aglutina as componentes remanescentes.
-
-    \subsection{Definição dos polígonos delimitadores de regiões}
-
-      Definir pontos do polígono que envolve cada componente conexa.
-
-    \subsection{Análise do desempenho}
-
-      O PRImA disponibiliza um software que implementa o algoritmo de comparação descrito em [Scenario Driven In-Depth Performance Evaluation of Document Layout Analysis Methods].
-
-      A comparação entre a solução obtida e a solução ideal, é dividida nas seguintes situações:
-
-      \begin{itemize}
-        \item a região segmentada não possui intersecção alguma com as regiões growndtruth.
-        \item a região growndtruth é totalmente coberta pela região segmentada.
-        \item a região growndtruth é coberta por duas regiões segmentadas, dividindo-a.
-        \item duas regiões growdtruth são unidas por uma única região segmentada.
-        \item uma região growndtruth não é coberta por nenhuma região segmentada, ou seja, esquecida.
-      \end{itemize}
-
-      A importância de cada erro ou acerto pode ser contextualizado de acordo com o problema em questão. Por exemplo, a união de duas regiões growntruth em uma única região segmentada pode não ser um erro indesejável caso a ordem de leitura seja respeitada.
-
-
-
-
-
-\section{Resultados experimentais}
-
-Nesta seção serão descritos os resultados experimentais obtidos.
-
-\subsection{Base de dados}
-Descrever a base de imagens utilizadas.
-
-Qual pré-processamento foi aplicado e com quais parâmetros.
-
-
-\TODO{colocar resultado de n-fold feito com estratégia de apagar região}
-
-\subsection{Experimento A}
-
-\subsection{Experimento B}
-
-
-\subsection{Discussão}
-
-      \begin{itemize}
-        \item Estatísticas com base no MAE das estratégias propostas.
-        \item Estatísticas do ICDAR.
-      \end{itemize}
-
+  Em todos os experimentos medimos o F-score \TODO{ref} da classificação.
 
 
 \section{Conclusão}
-
-
 
 
 \section{Apêndice}
@@ -607,6 +456,142 @@ Qual pré-processamento foi aplicado e com quais parâmetros.
         \item Escolha da janela ótima.
         \item Operador multi-nível.
       \end{itemize}
+
+  \subsection{Base de dados}
+
+    As imagens utilizadas nos experimentos foram obtidas de um banco de dados construído pelos pesquisadores do PRImA ao longo de anos \TODO{ref}. Ele inclui um conjunto de documentos que busca simular um cenário realístico de trabalho, com layouts complexos e diferentes tipos de fontes e formatos de regiões. Isto é importante para avaliar a aplicabilidade do método em situações práticas, onde um controle sobre o formato do conteúdo seria indesejável ou inviável.
+
+    No artigo [A Realistic Dataset for Performance Evaluation of Document Layout Analysis] de 2009, os autores apresentam um conjunto de dados com páginas de revistas, artigos científicos diversos, documentos modernos e não apenas históricos.
+
+    O conjunto de dados contém não só imagens mas também arquivos XML [The PAGE (Page Analysis and Ground-truth Elements) Format Framework] com metadados como informações bibliográficas (título, autor, publicação), informações das imagens (resolução, bit depth, modelo do scanner), características do layout (número de colunas, variadade de tamanhos de fontes) e informações administrativas (direitos autorais).
+
+    Os documentos são digitalizados com um cartão escuro por trás para minimizar a exposição da contra página. Posteriormente um algoritmo analisa possíveis falhas, como rotação do documento, marcando-os para redigitalização. Uma correção automática não é utilizada pois isto pode comprometer a qualidade da imagem.
+
+    Uma vez que a imagem foi aceita no banco de dados, inicia-se um processo manual de marcação do grownd-truth. Este trabalho deve ser realizado da forma mais precisa possível pois é a base para determinar a corretude dos algoritmos segmentadores. Por se tratar de uma etapa muito custosa, uma ferramenta semi-automática chamada Aletheia é utilizada para agilizar o processo. Esta ferramenta permite a uma pessoa desenhar uma região poligonal em torno de uma região de interesse. Em seguida esta região é automaticamate ajustada pelo software, como se a pessoa estivesse colocando um elástico que aperta a região.
+
+    As imagens utilizadas para exemplificação nesta monografia não são as mesmas do banco de dados referido por limitações de licença.
+
+  \subsection{Algoritmo de Otsu para binarização}
+
+    \TODO{mover esta subseção para dentro de dataset e pré processamentos}
+
+    Implementar e avaliar cada algoritmo binarizador vai além do escopo deste trabalho, portanto escolhemos um bom algoritmo segundo os resultados obtidos em \cite{citeulike:890354}. Como o próprio artigo aponta, não foi encontrado um método que apresentasse desempenho superior em todas os cenários de teste realizados.
+
+    Os requisitos para a escolha foram o da independência de supervisionamento e parametrização. Caso o algoritmo demandasse ajustes específicos de acordo com a imagem, o seu uso comprometeria a promissa de automatização. Dentre a lista de soluções com esta característica, escolhemos o algoritmo de Otsu \cite{1979:ots}, por ser de fácil implementação e apresentar resultados satisfatórios nos experimentos realizados.
+
+    O algoritmo de Otsu encontra um nível de cinza $t$ tal que a soma ponderada da variância dentro das classes $\mathbb{F} = \{ x \colon f(x) \geq t \}$ (foreground) e $\mathbb{B} = \{ x \colon f(x) < t \}$ (background) seja minimizada, ou seja,
+
+    \begin{equation}
+      t = argmin \{ w_\mathbb{B} \sigma^{2}_{\mathbb{B}} + w_\mathbb{F} \sigma^{2}_{\mathbb{F}} \}
+    \end{equation}
+
+    onde $w_\mathbb{B} = \frac{|\mathbb{B}|}{|E|}$ e $w_f = \frac{|\mathbb{F}|}{|E|}$ são os pesos respectivamente do background e foreground e $\sigma^{2}_{\mathbb{B}}$ e $\sigma^{2}_{\mathbb{F}}$ são as variâncias das classes.
+
+    A tabela \ref{tab:otsu} apresenta um passo a passo do algoritmo aplicado à figura \ref{fig:letrah}.
+
+    \begin{figure*}[htb]
+      \begin{center}
+        \includegraphics[width=0.5\textwidth]{assets/binarization/h_3grayscale_big.png}
+        \end{center}
+      \caption{Imagem digitalizada de uma letra H obtida de uma revista.}
+      \label{fig:letrah}
+    \end{figure*}
+
+    \begin{center}
+
+    \begin{table}
+      \caption{Estágios da execução do algoritmo de Otsu.}
+      \begin{tabular}[p]{@{}ccccccc@{}}
+        \centering
+
+        original & 25\% & 37,5\% & 50\% & 62,5\% & 75\% & 87,5\% \\
+
+        % Imagem original e respectivo histograma
+        \includegraphics[width=0.05\textwidth]{assets/binarization/gray3_big.png}
+        &
+        \includegraphics[width=0.05\textwidth]{assets/binarization/h25t.png}
+        &
+        \includegraphics[width=0.05\textwidth]{assets/binarization/h38t.png}
+        &
+        \includegraphics[width=0.05\textwidth]{assets/binarization/h50t.png}
+        &
+        \includegraphics[width=0.05\textwidth]{assets/binarization/h63t.png}
+        &
+        \includegraphics[width=0.05\textwidth]{assets/binarization/h75t.png}
+        &
+        \includegraphics[width=0.05\textwidth]{assets/binarization/h88t.png}
+        \\
+
+        % histogramas
+
+        \includegraphics[scale=0.4]{assets/binarization/3bit_hist.png}
+        &
+        \includegraphics[scale=0.4]{assets/binarization/13hist.png}
+        &
+        \includegraphics[scale=0.4]{assets/binarization/25hist.png}
+        &
+        \includegraphics[scale=0.4]{assets/binarization/50hist.png}
+        &
+        \includegraphics[scale=0.4]{assets/binarization/63hist.png}
+        &
+        \includegraphics[scale=0.4]{assets/binarization/75hist.png}
+        &
+        \includegraphics[scale=0.4]{assets/binarization/88hist.png}
+
+        \\
+        % peso do background
+        $w_\mathbb{B}$ & 0.1931 & 0.4015 & 0.4179 & 0.4532 & 0.5479 & 0.6969 \\
+
+        % média do background
+        $\mu_\mathbb{B}$ & 34.00 & 51.64 & 53.61 & 61.37 & 83.08 & 112.56 \\
+
+        % variância do background
+        $\sigma^{2}_{\mathbb{B}}$ & 7.27 & 288.58 & 372.94 & 1054.08 & 3128.03 & 5656.37 \\
+
+        % peso do foreground
+        $w_{\mathbb{F}}$ & 0.80 & 0.59 & 0.58 & 0.54 & 0.45 & 0.30 \\
+
+        % média do foreground
+        $\mu_{\mathbb{F}}$ & 184.87 & 225.55 & 229.03 & 233.95 & 243.79 & 255.0 \\
+
+        % variância do foreground
+        $\sigma^{2}_{\mathbb{F}}$ & 5799.89 & 1409.01 & 1006.11 & 673.10 & 255.43 & 0.0 \\
+
+        % variância intra-classe
+        $\sigma^{2}_{w}$ & 21495165144 & 967521582 & 512693389 & 595067475 & 4269882800 & 17660993341 \\
+
+        \label{tab:otsu}
+      \end{tabular}
+    \end{table}
+    \end{center}
+
+    Como podemos notar, para $t = 50\%$ atingimos o menor valor de $\sigma^{2}_{w} \approx 512693389$. Neste caso o limiar coincide com o único vale no histograma, porém isto nem sempre será válido. Algumas imagens não possuem vales bem definidos. Este algoritmo não se baseia no formato do histograma mas sim na coesão intra classe e na separabilidade das classes.
+
+    \begin{figure*}[htb]
+      \begin{center}
+        \includegraphics[width=0.5\textwidth]{assets/binarization/bin_big.png}
+        \end{center}
+      \caption{Imagem binarizada com $t = 50\%.$}
+      \label{fig:letrah_bin}
+    \end{figure*}
+
+    Uma desvantagem de utilizar este algoritmo é a influência da média de todo os pixels da imagem. Isto pode fazer com que o limiar ótimo para a página toda não seja o mesmo que o de dentro de uma janela.
+
+    % 
+    % Usei o imagemagick para criar uma imagem em tons de cinza com a quantidade de níveis desejado, usando o seguinte comando
+    % 
+    % convert -type Grayscale -depth 3 h8rgb.png h_3grayscale.png
+    % 
+    % Posteriormente gerei imagens com threshold em diferentes níveis
+    % 
+    % convert -threshold 60% h_3grayscale.png h60t.png
+    % 
+    % o comando identify -verbose mostra o histograma
+    % 
+    % Usei o gráfico do site http://www.labbookpages.co.uk/software/imgProc/otsuThreshold.html como exemplo
+    % 
+    % binarizado com ../otsuthresh -g save h_3grayscale.png bin.gif
+    % 
 
       %% \subsubsection{Álgebra booleana}
 
