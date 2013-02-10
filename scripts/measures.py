@@ -171,7 +171,7 @@ if sys.argv[1] == "gen_chart":
       sys.stdout.write(', ' + str("%.4f" % m))
     sys.stdout.write('],\n')
 
-def plot_bars(groups, group_labels, legends, ylabel):
+def plot_bars(groups, group_labels, legends, ylabel, yscale=None):
   N = len(group_labels)
 
   ind = np.arange(N)  # the x locations for the groups
@@ -187,7 +187,7 @@ def plot_bars(groups, group_labels, legends, ylabel):
   rects = []
   i = 0
   for group in groups:
-    rects.append(ax.bar(ind + ((i + 3) * 1.0 * width), group, width, color=colors[i]))
+    rects.append(ax.bar(ind + ((i + 3) * 1.0 * width), group, width, bottom=10**-3, color=colors[i]))
     i += 1
   
   ax.set_xticks(ind+0.5+width)
@@ -196,6 +196,9 @@ def plot_bars(groups, group_labels, legends, ylabel):
   box = ax.get_position()
   ax.set_position([box.x0, box.y0, box.width * 0.95, box.height])
   ax.legend(rects, legends, loc='center left', bbox_to_anchor=(1, 0.5), prop={'size':14})
+
+  if yscale != None:
+    plt.yscale(yscale)
 
   plt.ylabel(ylabel, fontsize=14)
   return plt
@@ -221,7 +224,10 @@ def plot(pub, region, stat_key):
     legends.append(tsize+'%')
 
   plt = plot_bars(groups, group_labels, legends, translations[stat_key])
-
+  if(stat_key == 'mcc'):
+    plt.ylim([-1.0,1.0])
+  else:
+    plt.ylim([0,1.0])
   # plt.show()
   plt.savefig(plot_dir + "/" + pub + "_" + region + "_" + stat_key + ".png")
 
@@ -415,9 +421,13 @@ if sys.argv[1] == "time_chart":
     for tsize in training_set_sizes:
       legends.append(tsize+'%')
 
-    plt = plot_bars(groups, group_labels, legends, "Segundos")
+    plt = plot_bars(groups, group_labels, legends, "Segundos", 'log')
+    plt.ylim([0,1000000.0])
+    # plt.show()
+    plt.savefig(plot_dir + "/" + region + "_time_log.png")
 
+    plt = plot_bars(groups, group_labels, legends, "Segundos")
+    plt.ylim([0,1000000.0])
     # plt.show()
     plt.savefig(plot_dir + "/" + region + "_time.png")
 
-  

@@ -30,6 +30,8 @@
 
 \usepackage{morefloats}
 
+\usepackage{multirow}
+
 % Surround parts of graphics with box
 \usepackage{boxedminipage}
 
@@ -493,32 +495,85 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
 \section{Resultados}
 
-  A grande quantidade de dados gerados apresenta um desafio a análise. Para tanto utilizamos quatro métricas (precisão, sensibilidade, f-measure e mcc), como detalhado abaixo. Cada métrica utiliza uma combinação diferente das contagens das quatro diferentes classes de resultado (\TODO{ref tabela}).
-
-  \begin{table}
+  O processo de segmentação foi avaliado em dois diferentes estágios: após a aplicação do operador morfológico e após a consensualização. Para cada imagem processada contamos a quantidade de classificações em cada uma das categorias de erro/acerto da tabela \ref{tab:result_classes}. Com a contagem destas classes calculamos quatro métricas diferentes tabeladas em \ref{tab:metrics}. Apenas contamos quando o pixel na imagem original é ligado.
+  
+  \begin{table}[htb]
     \caption{Tabela com classes de resultados}
-    \begin{tabular}
-       & & \multicolumn{2}{ | c | }{Classificado como}
-       & & positivo & negativo
+    \begin{center}
+      \begin{tabular}{c c | c | c |}
+        \cline{3-4}
+         & & \multicolumn{2}{| c |}{Classificado como} \\
+         \cline{3-4}
+         & & positivo & negativo \\
+         \hline
+         \multicolumn{1}{|c|}{\multirow{2}{*}{Gabaritado como}} & positivo & 
+         \begin{tabular}[x]{@{}c@{}}Verdadeiro positivo ($tp$).\\ Pixel apagado corretamente.\end{tabular}
+         &
+         \begin{tabular}[x]{@{}c@{}}Falso negativo ($fn$).\\ Pixel deveria ter sido apagado.\end{tabular}\\
+         \cline{2-4}
+         \multicolumn{1}{|c|}{} & negativo & 
+         \begin{tabular}[x]{@{}c@{}}Falso positivo ($fp$).\\ Pixel não deveria ter sido apagado.\end{tabular}
+         & \begin{tabular}[x]{@{}c@{}}Verdadeiro negativo ($tn$).\\ Pixel mantido ligado corretamente.\end{tabular}\\
+         \hline
+      \end{tabular}
+    \end{center}
+    \label{tab:result_classes}
+  \end{table}
+
+  \begin{table}[htb]
+    \caption{Métricas para avaliação de desempenho dos operadores}
+    \begin{tabular}{ | c | c | c | c | }
+      \hline
+      Métrica & Fórmula & Pior desempenho & Valor ótimo 
+      \\ \hline
+      Precision (Precisão) & $\frac{tp}{tp + fp}$ & 0 & 1
+      \\ \hline
+      Recall (Sensibilidade) & $\frac{tp}{tp + fn}$ & 0 & 1
+      \\ \hline
+      F-measure & $2 \frac{Precision Recall}{Precision + Recall}$ & 0 & 1
+      \\ \hline
+      MCC & $\frac{tp tn - fp fn}{\sqrt{(tp + fp)(tp + fn)(tn + fp)(tn + fn)}}$ & -1 & 1
+      \\ \hline
     \end{tabular}
+    \label{tab:metrics}
   \end{table}
 
   \begin{itemize}
-    Precision (Precisão): quantidade de pixels corretamente classificados como pertencentes a uma região dividido pelo total de pixels classificados. Pior valor é 0 e melhor valor é 1.
-    Recall (Sensibilidade): quantidade de pixels corretamente classificados sobre quantidade de todos os pixels que deveria ter sido classificados. Pior valor é 0 e melhor valor é 1.
-    F-measure: média harmônica de Precision e Recall. Pior valor é 0 e melhor valor é 1.
-    MCC (Coeficiente de correlação de Mathew): Métrica bastante utilizada na avaliação de classificadores binários. Leva em consideração verdadeiros e falso positivos e negativos. Pior valor é -1 e melhor valor é 1. O valor 0 indica que o classificador é equivalente a um classificador aleatório. Funciona bem com classes de tamanhos muito diferentes.
+    \item Precision (Precisão): quantidade de pixels corretamente classificados como pertencentes a uma região dividido pelo total de pixels classificados.
+    \item Recall (Sensibilidade): quantidade de pixels corretamente classificados sobre quantidade de todos os pixels que deveria ter sido classificados.
+    \item F-measure: média harmônica de Precision e Recall.
+    \item MCC (Coeficiente de correlação de Mathew): Métrica bastante utilizada na avaliação de classificadores binários. Leva em consideração verdadeiros e falso positivos e negativos. O valor 0 indica que o classificador é equivalente a um classificador aleatório. Funciona bem com classes de tamanhos muito diferentes.
   \end{itemize}
 
-  A métrica mais comumente utilizada nas referências teóricas sobre construção de operadores morfológicos é o MAE \TODO{ref fórmula} (sigla em inglês para Erro Absoluto Médio), porém esta métrica não é muito elucidadora. Se, por exemplo, um dado operador ideal afetar 5\% dos pixels de uma imagem e o operador gerado afetar 5\% dos pixels da imagem não pertencentes aos 5\% do ideal, o MAE seria de 5\%. Ou seja, o operador errou todos os pixels que ele deveria ter modificado e ainda modificou outros indevidamente. Ela não distingue entre diferentes tipos de erro: rotulação parcial de regiões e rotulação indevida de regiões.
+  A métrica utilizada nas referências teóricas sobre operadores morfológicos automaticamente gerados é o MAE (sigla em inglês para Erro Absoluto Médio) $\frac{fp + fn}{N}$, sendo $N$ o número total de pixels na imagem. Porém esta métrica não é muito elucidadora. Se, por exemplo, um dado operador ideal afetar 5\% dos pixels de uma imagem e o operador gerado afetar 5\% dos pixels da imagem não pertencentes aos 5\% do ideal, o MAE seria de 5\%. Ou seja, o operador errou todos os pixels que ele deveria ter modificado e ainda modificou outros indevidamente. Ela não distingue entre diferentes tipos de erro: rotulação parcial de regiões e rotulação indevida de regiões.
 
-  Por este motivo adotamos a F-measure \TODO{ref para fórmula}, métrica mais comumente utilizada por pesquisadores de data mining.
+  Já o F-measure resultaria em 0 e o MCC poderia inclusive apresentar um valor negativo.
 
-  \TODO{fórmula do f-measure}
+  Também apresentamos o tempo, em escala linear (figuras \ref{fig:paragraph_build_time} e \ref{fig:heading_build_time}) e logarítmica (figuras \ref{fig:paragraph_build_time_log} e \ref{fig:heading_build_time_log}), para contrução dos operadores de parágrafo e título.
 
-  Esta métrica também nos permite comparar o nosso método com outros trabalhos da área de segmentação de imagem que o utilizam \TODO{ref para historical bla bla bla}.
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/TextRegion_paragraph_time.png}}
+    \caption{Tempo para treinamento dos operadores de parágrafo}
+    \label{fig:paragraph_build_time}
+  \end{figure*}
 
-  \TODO{tempo para construção dos operadores}
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/TextRegion_heading_time.png}}
+    \caption{Tempo para treinamento dos operadores de título}
+    \label{fig:heading_build_time}
+  \end{figure*}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/TextRegion_paragraph_time_log.png}}
+    \caption{Tempo para treinamento dos operadores de parágrafo em escala logarítmica}
+    \label{fig:paragraph_build_time_log}
+  \end{figure*}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/TextRegion_heading_time_log.png}}
+    \caption{Tempo para treinamento dos operadores de título em escala logarítmica}
+    \label{fig:heading_build_time_log}
+  \end{figure*}
 
   \begin{center}
     \begin{table}[p]
@@ -943,6 +998,8 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
     \caption{TIME: Classificação de títulos}
     \label{fig:time_TextRegion_heading_mcc}
   \end{figure*}
+
+  
 
 \section{Conclusão}
 
