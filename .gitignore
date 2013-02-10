@@ -8,6 +8,7 @@ datasets/
 */*.mtc
 */*.mtc0
 */*.gz
+*/*.toc
 */*.fdb_latexmk
 */*.bbl
 8/\#*
@@ -18,3 +19,6 @@ automation/training_data_png
 gamera
 experiments/icdar_2009
 rascunhos
+experiment_result.tar.gz
+experiment_result/
+scripts/*.pyc

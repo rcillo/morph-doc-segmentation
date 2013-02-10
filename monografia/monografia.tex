@@ -28,6 +28,8 @@
 \usepackage{amssymb, amsmath}
 %\usepackage{latexsym}
 
+\usepackage{morefloats}
+
 % Surround parts of graphics with box
 \usepackage{boxedminipage}
 
@@ -386,50 +388,561 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
 \section{Experimentos}
 
-  Realizamos experimentos com diferentes publicações, quantidade de regiões, quantidade de imagens de treinamento, diferentes parâmetros do TRIOS como tamanhos e formas de janela, e tamanhos de janelas na etapa de consensualização.
+  Realizamos experimentos variando diversos parâmetros em diferentes etapas da segmentação. Apesar de usarmos uma técnica de aprendizado computacional para automatizar parte do processo, identificar quais parâmetros produzem o melhor resultado a um custo desejável (tempo de processamento e poder computacional) é uma tarefa ainda experimental.
 
-  \subsection{Agrupamento de publicações}
+  A qualidade da solução e o tempo levado para processá-lo foram medidos a fim de identificar o \TODO{italico} lucus optimus, ou seja, a combinação que produz um bom resultado com um tempo de processamento razoaável.
 
-    Neste experimento medimos o desempenho do método quando aplicado a conjuntos de imagens de publicações diferentes ou apenas de uma única publicação. Diferentes publicações possuem diferentes tipos de regiões, utilizam famílias de fontes e tamanhos diferentes.
+  Os parâmetros escolhidos para análise foram:
+
+  \begin{itemize}
+    \item Mistura de publicações no conjunto de treinamento.
+    \item Quantidade de imagens no conjunto de treinamento.
+    \item Tipos de regiões.
+    \item Formatos de janelas.
+    \item Tamanhos de janelas para consensualização.
+  \end{itemize}
+
+  A seguir detalhamos os valores dos parâmetros e os motivos de sua escolha.
+
+  \subsection{Base de dados}
+
+    As imagens utilizadas nos experimentos foram obtidas de um banco de dados construído pelos pesquisadores do PRImA ao longo de anos \TODO{ref}. Ele inclui um conjunto de documentos que busca simular um cenário realístico de aplicação, com layouts complexos e diferentes tipos de fontes e formatos de regiões. Isto é importante para avaliar a aplicabilidade do método em situações práticas, onde um controle sobre o formato do conteúdo seria indesejável ou inviável.
+
+    No artigo [A Realistic Dataset for Performance Evaluation of Document Layout Analysis] de 2009, os autores apresentam um conjunto de dados com páginas de revistas, artigos científicos diversos, documentos modernos e não apenas históricos.
+
+    O conjunto de dados contém não só imagens mas também arquivos XML [The PAGE (Page Analysis and Ground-truth Elements) Format Framework] com metadados como informações bibliográficas (título, autor, publicação), informações das imagens (resolução, bit depth, modelo do scanner), características do layout (número de colunas, variadade de tamanhos de fontes) e informações administrativas (direitos autorais).
+
+    Os documentos são digitalizados com um cartão escuro por trás para minimizar a exposição da contra página. Posteriormente um algoritmo analisa possíveis falhas, como rotação do documento, marcando-os para redigitalização. Uma correção automática não é utilizada pois isto pode comprometer a qualidade da imagem.
+
+    Uma vez que a imagem foi aceita no banco de dados, inicia-se um processo manual de marcação do grownd-truth. Este trabalho deve ser realizado da forma mais precisa possível pois é a base para determinar a corretude dos algoritmos segmentadores. Por se tratar de uma etapa muito custosa, uma ferramenta semi-automática chamada Aletheia \TODO{ref} é utilizada para agilizar o processo. Esta ferramenta permite a uma pessoa desenhar uma região poligonal em torno de uma região de interesse. Em seguida esta região é automaticamate ajustada pelo software, como se a pessoa estivesse colocando um elástico que aperta a região.
+
+  \subsection{Mistura de publicações no conjunto de treinamento}
+
+    Diferentes publicações trabalham com fontes e grafismos próprios. A diferença fica evidente ao comparar um jornal antigo com uma revista sobre tecnologia. Incluir imagens de publicações diversas no mesmo conjunto de imagens de treinamento pode produzir operadores menos precisos. Mesmo entre publicações do mesmo período, podemos ter diferentes tamanhos de fontes e famílias de tipos. Este experimento tem por objetivo analisar o impacto na qualidade por tentar criar operadores mais genéricos.
+
+    Testamos os seguintes conjuntos de imagens de treinamento:
 
     \begin{itemize}
-      \item CACM
-      \item FORTUNE
-      \item IEEE
-      \item TIME
-      \item MIX
+      \item Comunications of the ACM: 263, 674, 677, 680, 683, 685, 686, 689, 692, 695, 802 e 803.
+      \item TIME Magazine: 232, 720, 721, 723, 782, 783, 784, 785 e 786.
+      \item Publicações misturadas (inclui imagens da Fortune, Business Week, Time, CACM, IEEE e CCEJ): 158,171,232,263,701,722,235,190,720,674,792,730
     \end{itemize}
 
     \TODO{mostra imagens de revistas com fontes bem diferentes}
 
+  \subsection{Tipos de regiões}
+
+    Os gabaritos do conjunto de dados utilizados nestes experimentos rotulam com detalhes cada região das imagens:
+
+    \begin{enumerate}
+      \item Text
+      \begin{enumerate}
+        \item Header 
+        \item Headings (títulos)
+        \item Capital (letras maiores)
+        \item Drop Capital
+        \item Credit
+        \item Paragraph
+        \item Floating
+        \item Page number
+        \item Footer
+      \end{enumerate}
+      \item Graphic
+      \item Math
+      \item Chart
+      \item Image
+      \item Noise
+      \item Separator
+      \item Table
+    \end{enumerate}
+
+    \TODO{esquema de o que cada região rotula}
+
+    Nos experimentos realizados nos limitamos a Text Heading e Text Paragraph por limitações de custo e tempo.
+
   \subsection{Quantidade de imagens de treinamento}
 
-    Medimos a sensibilidade do método à quantidade de imagens de treinamento. Analisamos separadamente a redução na taxa de erro de classificação por tipo de região.
+    A quantidade de imagens no conjunto de treinamento pode afetar a variedade e quantidade de padrões amostrados, influenciando diretamente a qualidade da solução. A sensibilidade a este fator pode depender to tipo de região a ser segmentada, caso a quantidade de amostras por imagem varie por região. O tempo para se treinar o operador também é impactado, pois deve-se coletar mais amostras.
 
-    \begin{itemize}
-      \item 1/3
-      \item 2/3
-      \item full
-    \end{itemize}
+    Treinamos operadores utilizando cinco tamanhos de conjuntos (de uma a cinco imagens).
 
-  \subsection{Tamanho da janela}
+  \subsection{Formatos de janelas}
 
-    Variando o tamanho da janela procuramos capturar padrões característicos de cada tipo de região. No caso de títulos precisamos de janelas maiores porém não necessariamente densas ou no caso de textos precisamos de janelas menores, verticais e densas. Realizamos testes com as seguintes janelas:
+    Variando o tamanho da janela procuramos capturar padrões característicos de cada tipo de região. O tamanho da janela impacta o tempo de processamento da etapa mais custosa que é a minimização, logo descobrir um tamanho de janela com um bom custo benefício é excêncial para aplicações práticas. Sabemos que nem sempre janelas maiores produzem resultados melhores \TODO{ref}, portanto este experimento procura descobrir o melhor.
 
-    \TODO{imagens das janelas}
+    Utilizamos janelas densas e esparças, ou seja, janelas com todos os pontos preenchidos ou apenas alguns. Os tamanhos variam de 3x3 a 7x7 para densas e de 3x3 a 11x11 para as esparças.
+
+    \TODO{imagens de algumas janelas}
 
   \subsection{Tamanho da janela de consensualização}
 
-    Apenas um pixel de diâmetro ou 50?
+    Experimentamos janelas variando de 3x3 a 15x15. Procuramos entender até quando a hipótese de que pixels de uma determinada região não ocorrem isoladamente é verdadeira.
+
+  \subsection{Aplicação}
+
+    Construímos mais de 150 operadores e os aplicamos aos nossos conjuntos de imagens de teste, cada um contendo 5 das imagens não envolvidas no treinamento dos operadores. Salvamos todas as imagens produzidas, totalizando \TODO{x GB} em resultados.
+
+    Todos os experimentos foram realizados utilizando scripts ruby para automatizar a ardua tarefa. Abaixo listamos todos os scripts com uma breve descrição.
+
+    \begin{itemize}
+      \item sample\_generator.rb produz todos os conjuntos de imagens para treinamento e teste, ou seja, ele transforma todas as imagens e XMLs da base de dados original em entradas apropriadas para as ferramentas que utilizamos. \TODO{enxer linguiça falando como implementamos}
+      \item build\_operators.rb gera todos os \TODO{X} operadores utilizados nos experimentos. \TODO{falar q usa o trios\_build}
+      \item apply\_all.rb aplica todos os operadores e salva os resultados, totalizando \TODO{X} imagens em \TODO{x gb}.
+      \item analyze.rb extrai todas as estatísticas apresentadas na próxima seção.
+    \end{itemize}
 
 \section{Resultados}
 
-  \TODO{Medir MAE}
+  A grande quantidade de dados gerados apresenta um desafio a análise. Para tanto utilizamos quatro métricas (precisão, sensibilidade, f-measure e mcc), como detalhado abaixo. Cada métrica utiliza uma combinação diferente das contagens das quatro diferentes classes de resultado (\TODO{ref tabela}).
 
-  \TODO{Medir f-score}
+  \begin{table}
+    \caption{Tabela com classes de resultados}
+    \begin{tabular}
+       & & \multicolumn{2}{ | c | }{Classificado como}
+       & & positivo & negativo
+    \end{tabular}
+  \end{table}
 
-  Em todos os experimentos medimos o F-score \TODO{ref} da classificação.
+  \begin{itemize}
+    Precision (Precisão): quantidade de pixels corretamente classificados como pertencentes a uma região dividido pelo total de pixels classificados. Pior valor é 0 e melhor valor é 1.
+    Recall (Sensibilidade): quantidade de pixels corretamente classificados sobre quantidade de todos os pixels que deveria ter sido classificados. Pior valor é 0 e melhor valor é 1.
+    F-measure: média harmônica de Precision e Recall. Pior valor é 0 e melhor valor é 1.
+    MCC (Coeficiente de correlação de Mathew): Métrica bastante utilizada na avaliação de classificadores binários. Leva em consideração verdadeiros e falso positivos e negativos. Pior valor é -1 e melhor valor é 1. O valor 0 indica que o classificador é equivalente a um classificador aleatório. Funciona bem com classes de tamanhos muito diferentes.
+  \end{itemize}
 
+  A métrica mais comumente utilizada nas referências teóricas sobre construção de operadores morfológicos é o MAE \TODO{ref fórmula} (sigla em inglês para Erro Absoluto Médio), porém esta métrica não é muito elucidadora. Se, por exemplo, um dado operador ideal afetar 5\% dos pixels de uma imagem e o operador gerado afetar 5\% dos pixels da imagem não pertencentes aos 5\% do ideal, o MAE seria de 5\%. Ou seja, o operador errou todos os pixels que ele deveria ter modificado e ainda modificou outros indevidamente. Ela não distingue entre diferentes tipos de erro: rotulação parcial de regiões e rotulação indevida de regiões.
+
+  Por este motivo adotamos a F-measure \TODO{ref para fórmula}, métrica mais comumente utilizada por pesquisadores de data mining.
+
+  \TODO{fórmula do f-measure}
+
+  Esta métrica também nos permite comparar o nosso método com outros trabalhos da área de segmentação de imagem que o utilizam \TODO{ref para historical bla bla bla}.
+
+  \TODO{tempo para construção dos operadores}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média da precisão na classificação de parágrafos do conjunto de dados CACM}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.6955& 0.8419& 0.8850& 0.9166& 0.9396& 0.6953& 0.8718& 0.9038& 0.9527& 0.9230\\
+        \multicolumn{1}{|l|}{20\%}& 0.8378& 0.8557& 0.8845& 0.8926& 0.9076& 0.8376& 0.8744& 0.8859& 0.9296& 0.9029\\
+        \multicolumn{1}{|l|}{30\%}& 0.8383& 0.8690& 0.8911& 0.8979& 0.9141& 0.8376& 0.8751& 0.8921& 0.9345& 0.9047\\
+        \multicolumn{1}{|l|}{40\%}& 0.8428& 0.8635& 0.8885& 0.8943& 0.9117& 0.8376& 0.8651& 0.8820& 0.9291& 0.9025\\
+        \multicolumn{1}{|l|}{50\%}& 0.8418& 0.8465& 0.8826& 0.8918& 0.9125& 0.8376& 0.8601& 0.8831& 0.9289& 0.9044\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+    
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/cacm_TextRegion_paragraph_precision.png}}
+    \caption{CACM: Classificação de parágrafos}
+    \label{fig:cacm_TextRegion_paragraph_precision}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média recall na classificação de parágrafos do conjunto de dados CACM}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.9999& 0.9537& 0.9817& 0.9736& 0.9718& 1.0000& 0.9906& 0.9937& 0.9863& 0.9866\\
+        \multicolumn{1}{|l|}{20\%}& 0.7796& 0.9461& 0.9778& 0.9686& 0.9677& 0.7781& 0.9894& 0.9944& 0.9823& 0.9829\\
+        \multicolumn{1}{|l|}{30\%}& 0.7795& 0.9316& 0.9740& 0.9683& 0.9668& 0.7781& 0.9886& 0.9928& 0.9829& 0.9848\\
+        \multicolumn{1}{|l|}{40\%}& 0.7789& 0.9433& 0.9739& 0.9643& 0.9641& 0.7781& 0.9886& 0.9928& 0.9810& 0.9832\\
+        \multicolumn{1}{|l|}{50\%}& 0.7796& 0.9591& 0.9879& 0.9802& 0.9781& 0.7781& 0.9939& 0.9953& 0.9884& 0.9896\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/cacm_TextRegion_paragraph_recall_or_sensitivity.png}}
+    \caption{CACM: Classificação de parágrafos}
+    \label{fig:cacm_TextRegion_paragraph_recall_or_sensitivity}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média F1 na classificação de parágrafos do conjunto de dados CACM}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.8088& 0.8932& 0.9304& 0.9440& 0.9553& 0.8087& 0.9268& 0.9462& 0.9691& 0.9534\\
+        \multicolumn{1}{|l|}{20\%}& 0.8067& 0.8979& 0.9284& 0.9287& 0.9365& 0.8058& 0.9278& 0.9366& 0.9550& 0.9409\\
+        \multicolumn{1}{|l|}{30\%}& 0.8068& 0.8987& 0.9303& 0.9315& 0.9396& 0.8058& 0.9279& 0.9394& 0.9580& 0.9428\\
+        \multicolumn{1}{|l|}{40\%}& 0.8087& 0.9010& 0.9288& 0.9277& 0.9370& 0.8058& 0.9221& 0.9337& 0.9542& 0.9409\\
+        \multicolumn{1}{|l|}{50\%}& 0.8086& 0.8984& 0.9319& 0.9336& 0.9440& 0.8058& 0.9215& 0.9354& 0.9576& 0.9448\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/cacm_TextRegion_paragraph_f1.png}}
+    \caption{CACM: Classificação de parágrafos}
+    \label{fig:cacm_TextRegion_paragraph_f1}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média MCC na classificação de parágrafos do conjunto de dados CACM}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0212& 0.5591& 0.7194& 0.7746& 0.8199& 0.0006& 0.6999& 0.7775& 0.8669& 0.8100\\
+        \multicolumn{1}{|l|}{20\%}& 0.3717& 0.5825& 0.7123& 0.7134& 0.7460& 0.3691& 0.7025& 0.7312& 0.8123& 0.7560\\
+        \multicolumn{1}{|l|}{30\%}& 0.3726& 0.5940& 0.7205& 0.7276& 0.7621& 0.3691& 0.7022& 0.7434& 0.8261& 0.7671\\
+        \multicolumn{1}{|l|}{40\%}& 0.3815& 0.5950& 0.7105& 0.7087& 0.7497& 0.3691& 0.6803& 0.7187& 0.8095& 0.7568\\
+        \multicolumn{1}{|l|}{50\%}& 0.3795& 0.5740& 0.7246& 0.7302& 0.7767& 0.3691& 0.6810& 0.7259& 0.8235& 0.7743\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/cacm_TextRegion_paragraph_mcc.png}}
+    \caption{CACM: Classificação de parágrafos}
+    \label{fig:cacm_TextRegion_paragraph_mcc}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média da precisão na classificação de parágrafos do conjunto de dados TIME}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.7725& 0.8186& 0.8662& 0.8856& 0.9093& 0.7226& 0.8536& 0.8119& 0.8968& 0.8095\\
+        \multicolumn{1}{|l|}{30\%}& 0.7729& 0.8123& 0.8699& 0.9007& 0.9177& 0.7226& 0.8440& 0.8188& 0.9032& 0.8210\\
+        \multicolumn{1}{|l|}{40\%}& 0.7466& 0.7997& 0.8655& 0.9008& 0.9211& 0.7077& 0.7858& 0.8155& 0.9044& 0.8271\\
+        \multicolumn{1}{|l|}{50\%}& 0.7493& 0.8139& 0.8775& 0.9087& 0.9304& 0.7226& 0.8364& 0.8221& 0.9094& 0.8272\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/time_TextRegion_paragraph_precision.png}}
+    \caption{TIME: Classificação de parágrafos}
+    \label{fig:time_TextRegion_paragraph_precision}
+  \end{figure*}  
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média recall na classificação de parágrafos do conjunto de dados TIME}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.6025& 0.7503& 0.7864& 0.7966& 0.8039& 0.7645& 0.6514& 0.9461& 0.8761& 0.9172\\
+        \multicolumn{1}{|l|}{30\%}& 0.6011& 0.7712& 0.7990& 0.8170& 0.8286& 0.7645& 0.6825& 0.9489& 0.8939& 0.9263\\
+        \multicolumn{1}{|l|}{40\%}& 0.7304& 0.8761& 0.9166& 0.9281& 0.9269& 0.8087& 0.9228& 0.9872& 0.9640& 0.9734\\
+        \multicolumn{1}{|l|}{50\%}& 0.7212& 0.8436& 0.8982& 0.9177& 0.9251& 0.7645& 0.7446& 0.9790& 0.9595& 0.9728\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/time_TextRegion_paragraph_recall_or_sensitivity.png}}
+    \caption{TIME: Classificação de parágrafos}
+    \label{fig:time_TextRegion_paragraph_recall_or_sensitivity}
+  \end{figure*}  
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média F1 na classificação de parágrafos do conjunto de dados TIME}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.6757& 0.7819& 0.8230& 0.8374& 0.8519& 0.7418& 0.7373& 0.8733& 0.8857& 0.8594\\
+        \multicolumn{1}{|l|}{30\%}& 0.6750& 0.7902& 0.8315& 0.8553& 0.8694& 0.7418& 0.7532& 0.8785& 0.8980& 0.8699\\
+        \multicolumn{1}{|l|}{40\%}& 0.7372& 0.8353& 0.8897& 0.9138& 0.9235& 0.7536& 0.8479& 0.8927& 0.9330& 0.8940\\
+        \multicolumn{1}{|l|}{50\%}& 0.7338& 0.8276& 0.8868& 0.9123& 0.9270& 0.7418& 0.7869& 0.8932& 0.9335& 0.8937\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/time_TextRegion_paragraph_f1.png}}
+    \caption{TIME: Classificação de parágrafos}
+    \label{fig:time_TextRegion_paragraph_f1}
+  \end{figure*}  
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média MCC na classificação de parágrafos do conjunto de dados TIME}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.5438& 0.6720& 0.7350& 0.7575& 0.7817& 0.6004& 0.6376& 0.8007& 0.8224& 0.7784\\
+        \multicolumn{1}{|l|}{30\%}& 0.5431& 0.6801& 0.7467& 0.7844& 0.8059& 0.6004& 0.6507& 0.8091& 0.8407& 0.7958\\
+        \multicolumn{1}{|l|}{40\%}& 0.6010& 0.7393& 0.8253& 0.8642& 0.8799& 0.6137& 0.7601& 0.8352& 0.8939& 0.8362\\
+        \multicolumn{1}{|l|}{50\%}& 0.5977& 0.7310& 0.8227& 0.8629& 0.8863& 0.6004& 0.6854& 0.8350& 0.8947& 0.8363\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/time_TextRegion_paragraph_mcc.png}}
+    \caption{TIME: Classificação de parágrafos}
+    \label{fig:time_TextRegion_paragraph_mcc}
+  \end{figure*}  
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média da precisão na classificação de títulos do conjunto de dados CACM}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0000& 0.2115& 0.2198& 0.2301& 0.2335& 0.0467& 0.2413& 0.0910& 0.2802& 0.1275\\
+        \multicolumn{1}{|l|}{20\%}& 0.0000& 0.1650& 0.1894& 0.2171& 0.2609& 0.0467& 0.2485& 0.0878& 0.2943& 0.1676\\
+        \multicolumn{1}{|l|}{30\%}& 0.0000& 0.1352& 0.1115& 0.2115& 0.2642& 0.0467& 0.2000& 0.0725& 0.3060& 0.1495\\
+        \multicolumn{1}{|l|}{40\%}& 0.0000& 0.1518& 0.1381& 0.2146& 0.2637& 0.0467& 0.2000& 0.1006& 0.2945& 0.1653\\
+        \multicolumn{1}{|l|}{50\%}& 0.0000& 0.1864& 0.1848& 0.2334& 0.2842& 0.0467& 0.0000& 0.1069& 0.3256& 0.1771\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+    
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/cacm_TextRegion_heading_precision.png}}
+    \caption{CACM: Classificação de títulos}
+    \label{fig:cacm_TextRegion_heading_precision}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média recall na classificação de títulos do conjunto de dados CACM}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0000& 0.0083& 0.0667& 0.1420& 0.2059& 0.1731& 0.0130& 0.2912& 0.2506& 0.3712\\
+        \multicolumn{1}{|l|}{20\%}& 0.0000& 0.0014& 0.0382& 0.1209& 0.2411& 0.1731& 0.0028& 0.2550& 0.2931& 0.4557\\
+        \multicolumn{1}{|l|}{30\%}& 0.0000& 0.0003& 0.0049& 0.0539& 0.1683& 0.1731& 0.0000& 0.1883& 0.2081& 0.3980\\
+        \multicolumn{1}{|l|}{40\%}& 0.0000& 0.0002& 0.0167& 0.1091& 0.2598& 0.1731& 0.0000& 0.2777& 0.2925& 0.4640\\
+        \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0002& 0.0269& 0.1113& 0.2709& 0.1731& 0.0000& 0.2866& 0.3531& 0.4885\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/cacm_TextRegion_heading_recall_or_sensitivity.png}}
+    \caption{CACM: Classificação de títulos}
+    \label{fig:cacm_TextRegion_heading_recall_or_sensitivity}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média F1 na classificação de títulos do conjunto de dados CACM}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0000& 0.0152& 0.0869& 0.1428& 0.1766& 0.0601& 0.0234& 0.1119& 0.2094& 0.1510\\
+        \multicolumn{1}{|l|}{20\%}& 0.0000& 0.0028& 0.0560& 0.1311& 0.2161& 0.0601& 0.0054& 0.1074& 0.2677& 0.2116\\
+        \multicolumn{1}{|l|}{30\%}& 0.0000& 0.0005& 0.0088& 0.0742& 0.1799& 0.0601& 0.0000& 0.0838& 0.2308& 0.1858\\
+        \multicolumn{1}{|l|}{40\%}& 0.0000& 0.0004& 0.0265& 0.1252& 0.2319& 0.0601& 0.0000& 0.1234& 0.2731& 0.2125\\
+        \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0004& 0.0429& 0.1331& 0.2481& 0.0601& 0.0000& 0.1302& 0.3169& 0.2259\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/cacm_TextRegion_heading_f1.png}}
+    \caption{CACM: Classificação de títulos}
+    \label{fig:cacm_TextRegion_heading_f1}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média MCC na classificação de títulos do conjunto de dados CACM}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0000& 0.0243& 0.0739& 0.1184& 0.1484& -0.0879& 0.0357& 0.0239& 0.1958& 0.0964\\
+        \multicolumn{1}{|l|}{20\%}& 0.0000& 0.0078& 0.0508& 0.1065& 0.1849& -0.0879& 0.0176& 0.0117& 0.2342& 0.1640\\
+        \multicolumn{1}{|l|}{30\%}& 0.0000& 0.0020& 0.0058& 0.0676& 0.1551& -0.0879& 0.0006& -0.0159& 0.2023& 0.1264\\
+        \multicolumn{1}{|l|}{40\%}& 0.0000& 0.0024& 0.0203& 0.1003& 0.1975& -0.0879& 0.0008& 0.0319& 0.2372& 0.1637\\
+        \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0033& 0.0416& 0.1115& 0.2162& -0.0879& 0.0000& 0.0435& 0.2838& 0.1851\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/cacm_TextRegion_heading_mcc.png}}
+    \caption{CACM: Classificação de títulos}
+    \label{fig:cacm_TextRegion_heading_mcc}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média da precisão na classificação de títulos do conjunto de dados TIME}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0000& 0.0000& 0.0020& 0.0571& 0.0776& 0.0189& 0.0000& 0.0232& 0.0510& 0.0277\\
+        \multicolumn{1}{|l|}{30\%}& 0.0000& 0.0000& 0.0018& 0.0063& 0.0137& 0.0189& 0.0000& 0.0227& 0.0151& 0.0217\\
+        \multicolumn{1}{|l|}{40\%}& 0.0000& 0.0000& 0.0081& 0.0203& 0.0447& 0.0189& 0.0000& 0.0271& 0.0600& 0.0297\\
+        \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0147& 0.0122& 0.0495& 0.0721& 0.0189& 0.0000& 0.0274& 0.1172& 0.0341\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+    
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/time_TextRegion_heading_precision.png}}
+    \caption{TIME: Classificação de títulos}
+    \label{fig:time_TextRegion_heading_precision}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média recall na classificação de títulos do conjunto de dados TIME}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0000& 0.0000& 0.0007& 0.0610& 0.1410& 0.1786& 0.0000& 0.1600& 0.0451& 0.2089\\
+        \multicolumn{1}{|l|}{30\%}& 0.0000& 0.0000& 0.0004& 0.0053& 0.0166& 0.1786& 0.0000& 0.1558& 0.0108& 0.1598\\
+        \multicolumn{1}{|l|}{40\%}& 0.0000& 0.0000& 0.0001& 0.0046& 0.0210& 0.1786& 0.0000& 0.1626& 0.0138& 0.1821\\
+        \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0000& 0.0003& 0.0056& 0.0256& 0.1786& 0.0000& 0.1607& 0.0111& 0.1943\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/time_TextRegion_heading_recall_or_sensitivity.png}}
+    \caption{TIME: Classificação de títulos}
+    \label{fig:time_TextRegion_heading_recall_or_sensitivity}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média F1 na classificação de títulos do conjunto de dados TIME}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0000& 0.0000& 0.0010& 0.0568& 0.0966& 0.0331& 0.0000& 0.0392& 0.0451& 0.0476\\
+        \multicolumn{1}{|l|}{30\%}& 0.0000& 0.0000& 0.0007& 0.0056& 0.0146& 0.0331& 0.0000& 0.0383& 0.0123& 0.0371\\
+        \multicolumn{1}{|l|}{40\%}& 0.0000& 0.0000& 0.0003& 0.0073& 0.0272& 0.0331& 0.0000& 0.0449& 0.0214& 0.0494\\
+        \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0000& 0.0005& 0.0099& 0.0367& 0.0331& 0.0000& 0.0452& 0.0199& 0.0562\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/time_TextRegion_heading_f1.png}}
+    \caption{TIME: Classificação de títulos}
+    \label{fig:time_TextRegion_heading_f1}
+  \end{figure*}
+
+  \begin{center}
+    \begin{table}[p]
+      \caption{Média MCC na classificação de títulos do conjunto de dados TIME}
+      \begin{tabular}{ l | c c c c c || c c c c c | }
+        \cline{2-11}
+        & \multicolumn{10}{|c|}{janelas} \\
+        \cline{2-11}
+        & \multicolumn{5}{c||}{densa} & \multicolumn{5}{c|}{esparsa} \\
+        \cline{2-11}
+        & 3x3 & 4x4 & 5x5 & 6x6 & 7x7 & 3x3 & 5x5 & 7x7 & 9x9 & 11x11 \\
+        \hline
+        \multicolumn{1}{|l|}{10\%}& 0.0000& -0.0015& -0.0147& 0.0281& 0.0649& -0.0371& 0.0000& -0.0177& 0.0202& -0.0050\\
+        \multicolumn{1}{|l|}{30\%}& 0.0000& -0.0014& -0.0122& -0.0186& -0.0148& -0.0371& 0.0000& -0.0190& -0.0087& -0.0215\\
+        \multicolumn{1}{|l|}{40\%}& 0.0000& 0.0000& -0.0024& -0.0027& 0.0109& -0.0371& 0.0000& -0.0061& 0.0151& 0.0018\\
+        \multicolumn{1}{|l|}{50\%}& 0.0000& -0.0001& -0.0015& 0.0069& 0.0251& -0.0371& 0.0000& -0.0053& 0.0263& 0.0121\\
+        \hline  
+      \end{tabular}
+    \end{table}
+  \end{center}
+
+  \begin{figure*}[p]
+    \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/time_TextRegion_heading_mcc.png}}
+    \caption{TIME: Classificação de títulos}
+    \label{fig:time_TextRegion_heading_mcc}
+  \end{figure*}
 
 \section{Conclusão}
 
@@ -457,20 +970,6 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \item Operador multi-nível.
       \end{itemize}
 
-  \subsection{Base de dados}
-
-    As imagens utilizadas nos experimentos foram obtidas de um banco de dados construído pelos pesquisadores do PRImA ao longo de anos \TODO{ref}. Ele inclui um conjunto de documentos que busca simular um cenário realístico de trabalho, com layouts complexos e diferentes tipos de fontes e formatos de regiões. Isto é importante para avaliar a aplicabilidade do método em situações práticas, onde um controle sobre o formato do conteúdo seria indesejável ou inviável.
-
-    No artigo [A Realistic Dataset for Performance Evaluation of Document Layout Analysis] de 2009, os autores apresentam um conjunto de dados com páginas de revistas, artigos científicos diversos, documentos modernos e não apenas históricos.
-
-    O conjunto de dados contém não só imagens mas também arquivos XML [The PAGE (Page Analysis and Ground-truth Elements) Format Framework] com metadados como informações bibliográficas (título, autor, publicação), informações das imagens (resolução, bit depth, modelo do scanner), características do layout (número de colunas, variadade de tamanhos de fontes) e informações administrativas (direitos autorais).
-
-    Os documentos são digitalizados com um cartão escuro por trás para minimizar a exposição da contra página. Posteriormente um algoritmo analisa possíveis falhas, como rotação do documento, marcando-os para redigitalização. Uma correção automática não é utilizada pois isto pode comprometer a qualidade da imagem.
-
-    Uma vez que a imagem foi aceita no banco de dados, inicia-se um processo manual de marcação do grownd-truth. Este trabalho deve ser realizado da forma mais precisa possível pois é a base para determinar a corretude dos algoritmos segmentadores. Por se tratar de uma etapa muito custosa, uma ferramenta semi-automática chamada Aletheia é utilizada para agilizar o processo. Esta ferramenta permite a uma pessoa desenhar uma região poligonal em torno de uma região de interesse. Em seguida esta região é automaticamate ajustada pelo software, como se a pessoa estivesse colocando um elástico que aperta a região.
-
-    As imagens utilizadas para exemplificação nesta monografia não são as mesmas do banco de dados referido por limitações de licença.
-
   \subsection{Algoritmo de Otsu para binarização}
 
     \TODO{mover esta subseção para dentro de dataset e pré processamentos}
@@ -489,13 +988,20 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
     A tabela \ref{tab:otsu} apresenta um passo a passo do algoritmo aplicado à figura \ref{fig:letrah}.
 
-    \begin{figure*}[htb]
+    
+    \begin{table}[ht]
       \begin{center}
-        \includegraphics[width=0.5\textwidth]{assets/binarization/h_3grayscale_big.png}
-        \end{center}
-      \caption{Imagem digitalizada de uma letra H obtida de uma revista.}
-      \label{fig:letrah}
-    \end{figure*}
+        \caption{Imagem original em escala de cinza e correspondente binarizada com $t = 50\%.$}
+        \begin{tabular}{ c c }
+            \includegraphics[width=0.3\textwidth]{assets/binarization/h_3grayscale_big.png}
+            \label{fig:letrah}
+            &
+            \includegraphics[width=0.3\textwidth]{assets/binarization/bin_big.png}
+            
+            \label{fig:letrah_bin}
+        \end{tabular}
+      \end{center}
+    \end{table}
 
     \begin{center}
 
@@ -566,14 +1072,6 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
     \end{center}
 
     Como podemos notar, para $t = 50\%$ atingimos o menor valor de $\sigma^{2}_{w} \approx 512693389$. Neste caso o limiar coincide com o único vale no histograma, porém isto nem sempre será válido. Algumas imagens não possuem vales bem definidos. Este algoritmo não se baseia no formato do histograma mas sim na coesão intra classe e na separabilidade das classes.
-
-    \begin{figure*}[htb]
-      \begin{center}
-        \includegraphics[width=0.5\textwidth]{assets/binarization/bin_big.png}
-        \end{center}
-      \caption{Imagem binarizada com $t = 50\%.$}
-      \label{fig:letrah_bin}
-    \end{figure*}
 
     Uma desvantagem de utilizar este algoritmo é a influência da média de todo os pixels da imagem. Isto pode fazer com que o limiar ótimo para a página toda não seja o mesmo que o de dentro de uma janela.
 
