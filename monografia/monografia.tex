@@ -107,7 +107,7 @@ Intituto de Matemática e Estatística, IME-USP
 \bigskip
 \begin{quote}
 \begin{spacing}{1.2}
-\noindent {\bf \large Resumo}: Neste texto apresentamos nosso estudo sobre a aplicação de operadores morfológicos à segmentação de páginas de documentos, etapa importante na análise de documentos que busca extrair informações sobre a sua estrutura: regiões com títulos, legendas, figuras e blocos de texto. A qualidade da solução obtida será medida e comparada, segundo os mesmo critérios aplicados à resultados considerados estado da arte por pesquisadores da área.
+\noindent {\bf \large Resumo}: Neste texto apresentamos nosso estudo sobre a aplicação de operadores morfológicos à segmentação de páginas de documentos, etapa importante na análise de documentos que busca extrair informações sobre a sua estrutura: regiões com títulos, legendas, figuras e blocos de texto.
 \end{spacing} 
 \end{quote}
 
@@ -148,7 +148,7 @@ legendas, separadores, tabelas, fórmulas matemáticas e regiões com
 ruído.
 
 Em geral, a segmentação de página é um dos primeiros passos no
-processo de entendimento de um documento. Uma vez identificiados os
+processo de entendimento de um documento. Uma vez identificados os
 blocos estruturais, processamentos específicos para cada tipo de bloco
 podem ser aplicados. Por exemplo, no caso de blocos de textos é
 conveniente fazer o reconhecimento de texto para que o mesmo possa ser
@@ -171,39 +171,65 @@ Neste trabalho exploraremos a aplicabilidade de operadores
 morfológicos automaticamente gerados ao problema de segmentação de
 páginas.
 
-\TODO{completar a descrição da estrutura do texto}
-
 Este texto está organizado da seguinte forma. Na seção~\ref{sec:fundamentos},
 apresentamos as definições e conceitos básicos que serão importantes
-para a leitura deste texto.
+para a leitura deste texto. Na seção \ref{sec:op_morph} explicamos com maior profundidade a principal ferramenta utilizada para realizar a segmentação: operadores morfológicos automaticamente gerados. Na seção \ref{sec:metodologia} apresentamos como utilizamos todos os conceitos para resolver o problema. Na seções \ref{sec:experimentos} e \ref{sec:resultados} detalhamos os experimentos e apresentamos os resultados. Finalmente na seção \ref{sec:conclusao} fazemos a conclusão do trabalho.
+
+\clearpage
 
 \section{Fundamentos}
 \label{sec:fundamentos}
 
 \subsection{Imagens digitais}
   Uma imagem digital monocromática pode ser definida como uma função $f:
-  \mathbb{E} \subset \mathbb{Z}^2 \to \mathbb{K} = \{0,1,\ldots,k-1\}$, na qual $k$ representa o número de tons de cinza. Tipicamente adota-se $k=256$, ou seja, 8-bits de cor. Quando $k=1$ as imagens são denominadas {\bf binárias}; quando $k>1$ as imagens são denominadas {\bf tons de cinza}. Na prática, o domínio $\mathbb{E}$ é um retângulo finito de dimensões $m\times n$ (uma matriz de $m$ linhas e $n$ colunas).
+  E \subset \mathbb{Z}^2 \to K = \{0,1,\ldots,k-1\}$, na qual $k$ representa o número de tons de cinza. Tipicamente adota-se $k=256$, ou seja, 8-bits de cor. Quando $k=1$ as imagens são denominadas {\bf binárias}; quando $k>1$ as imagens são denominadas {\bf tons de cinza}. Na prática, o domínio $E$ é um retângulo finito de dimensões $m\times n$ (uma matriz de $m$ linhas e $n$ colunas).
 
-  Uma imagem RGB (colorida) é uma função $f: \mathbb{E} \to \mathbb{K}^3$, onde cada componente $\mathbb{K}$ representa a intensidade das cores vermelho, verde e azul, respectivamente.
+  Uma imagem RGB (colorida) é uma função $f: E \to K^3$, onde cada componente $K$ representa a intensidade das cores vermelho, verde e azul, respectivamente.
 
 \subsection{Operadores de imagens}
 Um operador de imagens é uma função que mapeia imagens em
-imagens. Denotando $\mathbb{E}=\mathbb{Z}^2$, $K=\{0,1,\ldots,k-1\}$ e
-todas as imagens definidas em $\mathbb{E}$ por $K^{\mathbb{E}}$,
-  podemos representar um operador de imagens como $\Psi: K^{\mathbb{E}}
-    \to K^{\mathbb{E}}$.
+imagens. Denotando $E=\mathbb{Z}^2$, $K=\{0,1,\ldots,k-1\}$ e
+todas as imagens definidas em $E$ por $K^{E}$,
+  podemos representar um operador de imagens como $\Psi: K^{E}
+    \to K^{E}$.
 
-\subsubsection{Binarização de imagens}
+  \subsubsection{Operadores morfológicos binário}
 
-A classe de operadores estudada restringe-se ao domínio das imagens binárias. Porém as imagens obtidas através de digitalização usualmente são coloridas (RGB de 24-bits). O processo de binarização é realizado por um operador que mapeia uma imagem colorida ou monocromática em uma imagem binária.
+    Uma função $f \in \{ 0, 1 \}^E$ pode ser vista como indicadora de um conjunto $S_f \subseteq E$, ou seja, para todo $x \in E$, $x \in S_f \Leftrightarrow f(x) = 1$. Desta forma, uma função binária pode ser vista como um conjunto. Uma função entre imagens pode ser vista como uma função entre conjuntos. Conjuntos adicionados da relação de inclusão constituem algebricamente um reticulados Booleano. Operadores morfológicos binários são operadores vistos como mapeamentos entre reticulados booleanos.
 
-Neste trabalho, primeiramente transformamos as imagens coloridas para níveis de cinza e posteriormente aplicamos a binarização.
+  \subsubsection{Operadores localmente definidos e invariantes por translação}
 
-Existem muitos algoritmos que realizam esta tarefa. Uma revisão extensa dos mais conhecidos métodos de binarização é apresentada em \cite{citeulike:890354}. Todos eles se aplicam a imagens em níveis de cinza, portanto inicialmente transformaremos a imagem colorida $f$ em níveis de cinza $g$:
+    Duas classes de operadores são importantes para o entendimento de operadores automaticamente gerados: localmente definidos e invariantes por translação.
 
-\begin{equation}
-  f(x) \in \mathbb{K}^3 \rightsquigarrow g(x) \in \mathbb{K} \rightsquigarrow b(x) \in \{0, 1\}
-\end{equation}
+    Sejam $x$ e $y$ pertencentes a $E$, $x + y$ denota a soma vetorial em $E$. Dado um conjunto $X \subseteq E$, $X_z = \{ x + z \colon x \in X \}$ denota a translação de $X$ por $z$
+
+    Seja $W \subseteq E$, chamado de janela ou elemento estruturante, um operador $\Psi$ é dito localmente definido em relação a $W$, para todo $X \subseteq E$, se,
+
+    \begin{equation}
+      [\Psi(X)](x) = [\Psi(X \cap W_x)](x).
+    \end{equation}
+
+    Operadores localmente definidos podem ser caracterizados por funções locais \cite{Tomita:1996:PrAuMa}. Ou seja, independentemente to tamanho do conjunto $X$, $\Psi(X)$ pode ser visto como uma função booleana $\psi_x \colon \{0, 1\}^n \rightarrow \{0, 1\}$, onde $n = |W|$, da seguinte forma:
+
+    \begin{equation}
+      [\Psi(X)](x) = \psi_x(X_{-x} \cap W),
+    \end{equation}
+
+    onde $X_{-x} \cap W$ denota a atribuição de valores de $x \in X$ às variáveis $x_i$ da função booleana, de acordo com a regra $x_i = 1 \Leftrightarrow w_i \in X_{-z} \cap W$, ou equivalentemente, se $w_i + z \in X$.
+
+    Se $\Psi$ também for invariante por translação então teremos $\psi_x = \psi_y$ para $x, y \in E$. Operadores localmente definidos e invariantes por translação são chamados de W-operadores, operadores de janela.
+
+    Alguns exemplos de operadores desta classe são dilatação \eqref{eq:dilatacao} e erosão \eqref{eq:erosao}, ditos operadores elementares.
+
+    \begin{equation}
+      \label{eq:dilatacao}
+      \delta_{B}(X) = \{ x \in E \colon B_{x} \cap X \neq \emptyset \}
+    \end{equation}
+
+    \begin{equation}
+      \label{eq:erosao}
+      \varepsilon_{B}(X) = \{ x \in E \colon B_{x} \subseteq E \}
+    \end{equation}
 
 \subsection{Classificação de objetos}
 
@@ -239,29 +265,7 @@ A segmentação de imagens é um processamento comum a praticamente
 todos os processos que envolvem análise de imagens. Segmentar uma
 imagem corresponde a particionar o seu domínio, de forma que cada
 região resultante corresponda (do ponto de vista semântico) a uma
-componente de interesse na análise em questão. Este problema pode ser modelado como uma classificação de objetos, onde o conjunto de pixels de uma imagem são os objetos em $X$ e as componentes em $Y$ são regiões de interesse, como ilustrado na tabela \ref{tab:image_segmentation}.
-
-\begin{table}
-  \caption{Exemplo de segmentação de imagem: separando frente e fundo.}
-  \begin{tabular}[p]{@{}ccc@{}}
-    \centering
-    \includegraphics[width=0.3\textwidth]{assets/image_segmentation/classification_example.png}
-    &
-    \includegraphics[width=0.3\textwidth]{assets/image_segmentation/background.png}
-    &
-    \includegraphics[width=0.3\textwidth]{assets/image_segmentation/foreground.png}
-
-    \\
-
-    imagem original
-    &
-    fundo
-    &
-    frente
-
-    \label{tab:image_segmentation}
-  \end{tabular}
-\end{table}
+componente de interesse na análise em questão. Este problema pode ser modelado como uma classificação de objetos, onde o conjunto de pixeis de uma imagem são os objetos em $X$ e as componentes em $Y$ são regiões de interesse.
 
 \subsection{Classificação dos componentes}
 \label{sec:components}
@@ -286,66 +290,73 @@ sendo $\mathbb{Y}$ um conjunto composto pelas regiões de interesse:
   \item regiões com ruído
 \end{itemize}
 
-\subsection{Avaliação da segmentação}
+Neste trabalho utilizaremos operadores morfológicos binários como classificadores de imagens. O processo todo será descrito na seção \ref{sec:metodologia}.
 
-\TODO{Dizer aqui como se avalia uma segmentação. Poderia ser a nível
-  de pixel, ou a nivel de regiões ou componentes. Pixel é fácil, mas
-  tem os potenciais problemas. No caso de região é preciso definir
-  como comparar regiões --- caso dos polígonos isotéticos, etc etc}
+\clearpage
 
-Os dois principais métodos utilizados para avaliar a qualidade das soluções para este problema são a comparação da classificação dos pixels individualmente ou a classificação de regiões.
-Optamos pela comparação entre pixels pois nosso método produz como resultado a classificação de pixels e não a delimitação de regiões. Seria necessário agrupar os pixels em regiões para que pudéssemos realizar outros tipo de avaliação, o que foge ao escopo deste trabalho.
+\section{Operadores morfológicos automaticamente gerados}
+\label{sec:op_morph}
 
-Uma vantagem na comparação entre pixels e não regiões é o fato de que evitamos restrições arbitrárias na forma das regiões.
+Construir operadores morfológicos que resolvam problemas complexos como o de segmentar uma página de documento, pode ser uma tarefa que demande muito tempo, experiência e conhecimento específico do assunto. Como estas imagens possuem características distintas dependendo da publicação (diferentes jornais e revistas), é possível que apenas um operador não consiga ser aplicado a todas as imagens. Ou seja, construir operadores com facilidade é um fator sensível para a viabilização desta abordagem.
 
+Nesta seção apresentamos um método para projetar operadores morfológicos de forma automática utilizando técnicas de aprendizado computacional.
 
-\section{Aprendizado de operadores morfológicos}
+O método proposto na tese de mestrado de Nina S. T. Hirata \cite{Tomita:1996:PrAuMa} requer que um conjunto de pares de imagens sejam fornecidos para uma etapa inicial de treinamento. Estes pares contém uma imagem {\bf original} e sua {\bf ideal}, ou seja, a mesma imagem porém modificada como desejamos que o método aprenda a reproduzir em outras imagens.
 
-Construir operadores morfológicos que resolvam problemas complexos como o de segmentar uma página de documento, pode ser uma tarefa que demande muito tempo, experiência e conhecimento específico do assunto. Como estas imagens possuem características distintas dependendo da publicação, é possível que apenas um operador não consiga ser aplicado a todas as imagens. Ou seja, construir operadores com facilidade é um fator sensível para a escolha desta abordagem.
+A partir deste conjunto de treinamento um operador é gerado, o qual podemos aplicar a outras imagens.
 
-Nesta seção apresentamos um método para projetar operadores morfológicos de forma automática utilizando tecnicas de aprendizado computacional. Primeiramente definiremos o conceito de operadores morfológicos.
+\subsection{Formalização}
 
-\subsection{Operadores morfológicos binários}
+Assumimos que as imagens originais e ideias são realizações dos conjuntos aleatória $S$ e $I$, com distribuição de probabilidade conjunta $P(S,I)$. Supõe-se que esta função seja caracterizada por um processo local $(S \cap Wz, I(z))$, com $S \cap Wz \in P(W_z)$, conjunto potência de $W_z$, e $I(z) \in \{0, 1\}$. Ou seja, as imagens de exemplo passam a ser vistas como realizações de conjuntos aleatórios localmente definidos pela janela $W$. Denotaremos este processo por $(X, y)$.
 
-Informalmente, operadores morfológicos são transformações entre imagens binárias que podem ser descritas através de propriedades geométricas e topológicas. Um exemplo amplamente conhecido é o da  dilatação, cuja aplicação está exemplificada na figura \TODO{ref}.
-
-\TODO{figura com dilatação e erosão}
-
-Formalmente define-se um operador morfológico binário como uma transformação localmente definida e invariante por translação entre reticulados completos.
-
-Um dos principais resultados da morfologia matemática revela que qualquer operador binário pode ser decomposto em uma combinação de operadores mais simples, dilatação \eqref{eq:dilatacao} e erosão \eqref{eq:erosao}, chamados de elementares.
+Desta forma, o trabalho de construção de um operador l.d. e i.t. $\psi$ que se aproxime do operador ideal $\Psi$, passa a ser o de minizar o erro absoluto médio ($MAE$), dado pela seguinte expressão:
 
 \begin{equation}
-  \label{eq:dilatacao}
-  \delta_{B}(X) = \{ x \in E \colon B_{x} \cap X \neq \emptyset \}
+  MAE(\Psi) = E[|\psi(X) - y|].
 \end{equation}
+
+Desenvolvendo a expressão acima, chegamos ao critério para decidir o valor de $\psi(X)$ para cada $X$.
 
 \begin{equation}
-  \label{eq:erosao}
-  \varepsilon_{B}(X) = \{ x \in E \colon B_{x} \subseteq E \}
+\begin{array}{rcl} 
+  MAE(\Psi) & =  & \sum\limits_{(X, y)} |\psi(X) - y | P(X,y) \\
+  & =  & \sum\limits_{(X, 0)} \psi(X)P(X, 0) + \sum\limits_{(X, 1)} |\psi(X) - 1|P(X, 1) \\
+  & = & \sum\limits_{X \colon \psi(X) = 1} P(X, 0) + \sum\limits_{X \colon \psi(X) = 0} P(X, 1)
+\end{array}
 \end{equation}
 
-O conjunto $B$ é denominado elemento estruturante.
+Ou seja, para minimizar o $MAE$ basta que escolhamos de forma adequada os valores de $\psi(X)$ de acordo com estimativas das probabilidades $P(X,0)$ e $P(X, 1)$ através da observação dos exemplos fornecidos.
 
-\subsection{Treinamento}
+A seguir detalhamos as etapas envolvidas na construção de $\psi$.
 
-A fim de projetar operadores morfológicos complexos de forma automática, utilizaremos o método proposto em \TODO{ref}. Nele, um conjunto de pares de imagens de treinamento é transformado em um operador. Estes pares são compostos da imagem \textbf{original}, denotada por $X$ e sua \textbf{derivada} $Y$, que exemplifica a transformação desejada. (figura \TODO{ref}).
+\subsection{Coleta}
 
-O processo consiste de 3 etapas (diagrama \TODO{ref}): coleta, decisão e minimização. Ao fim, teremos uma função booleana que aproxima é uma aproximação do operador desejado. A seguir detalhamos cada uma das etapas.
+Seja $C(X_W) = \{X \cap W + z \colon z \in E \}$ o conjunto de todas as configurações observadas ao se transladar a janela $W$ sobre a imagem $X$. Seja $Y_z$ o valor 0 ou 1 encontrado na imagem $Y$ na posição $z$. Construímos uma tabela com três colunas: $C(X_W)$, frequência observada $Y_z = 0$ e frequência $Y_z = 1$.
 
-\subsubsection{Coleta}
+O resultado desta etapa é uma estimativa $\hat{P}(X, y)$ de $P(X, y)$.
 
-Seja $C(X_W) = \{X \cap W + z \colon z \in E \}$ o conjunto de todas as configurações observadas ao se transladar a janela $W$ sobre a imagem $X$. Seja $Y_z$ o valor 0 ou 1 encontrado na imagem $Y$ na posição $z$. Construimos uma tabela com três colunas: $C(X_W)$, frequência observada $Y_z = 0$ e frequência $Y_z = 1$. (tabela exemplo \TODO{ref})
-
-\subsubsection{Decisão}
+\subsection{Decisão}
 
 As configurações observadas na etapa anterior possuirão valores relacionados em $Y$ iguais a 0, 1 ou ambos. No caso de tanto 1 como 0 terem sido observados, escolheremos como valor para a função final a com maior número de ocorrências. No caso de alguma configuração não ter sido observada ou de o número de ocorrências empatar, escolheremos o valor que simplifica a próxima etapa: minimização.
 
-\subsubsection{Minimização}
+Formalmente, se $\hat{P}(X, 1) > \hat{P}(X, 0)$, então $\psi(X) = 1$, do contrário $\psi(X) = 0$.
 
-\TODO{Descrever algoritmo ISI}
+\subsection{Minimização}
+
+Na etapa anterior é usual que nem todos os padrões possíveis para $X$ sejam observados. Logo precisamos completar a definição da função $\psi(X)$. Para tanto utilizamos um minimizador de funções booleanas chamado ISI. Ele não só completa a função como também produz uma representação mais compacta utilizando intervalos maximais.
+
+Um algoritmo bastante conhecido para realizar a minimização de funções booleanas é o algoritmo de QM (Quine-McCluskey), onde através de combinações dois a dois dos mintermos de uma expressão booleana procura-se criar cubos cada vez maiores, eliminando depois os cubos sobressalentes a fim de obter uma cobertura mínima da função.
+
+Porém esta etapa de combinação dois a dois tende a ser computacionalmente ineficiente. Além de que a etapa para identificação dos n-cubos primos (aqueles que não podem ser descartados) é muito custosa computacionalmente.
+
+Por estes motivos, a biblioteca TRIOS \cite{dostrios}, que implementa todo o processo descrito nesta seção, utiliza um outro algoritmo denominado ISI. Este algoritmo inicia com o n-cubo, representado na forma do intervalo $[\emptyset, W]$ e a cada iteração remove um ponto do n-cubo equivalente um mintermo negativo. Desta forma quebrando o intervalo inicial em outros $N$ intervalos. Após eliminar todos os mintermos negativos chegamos um conjunto de intervalos maximais que representam a função. Uma descrição mais detalhada do algoritmo pode ser encontrada em \cite{Tomita:1996:PrAuMa}.
+
+Esta é a última etapa do processo. Podemos agora aplicar o operador a outras imagens.
+
+\clearpage
 
 \section{Metodologia}
+\label{sec:metodologia}
 
 O método proposto é baseado em operadores morfológicos automaticamente gerados, ou seja, construímos um segmentador genérico a partir de alguns exemplos de segmentação (pares de imagens). A seguir detalhamos cada uma das etapas envolvidas.
 
@@ -360,39 +371,66 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
       O primeiro passo consiste na produção dos pares de imagens de treinamento. Estes pares consistem da imagem original binarizada e de sua variante segmentada.
 
-      Para cada imagem original geramos $n$ pares de exemplo, sendo $n$ o número de tipos de regiões que desejamos segmentar. No caso deste trabalho nos limitamos a três: texto, título e citação.
+      Para cada imagem original geramos $n$ pares de exemplo, sendo $n$ o número de tipos de regiões que desejamos segmentar. No caso deste trabalho nos limitamos a dois: textos de parágrafos e título.
 
-      A variante segmentada pode ser obtida através de duas estratégias: preservação ou preenchimento da região de interesse. A imagem *exemplos de treinamento* ilustra a geração das imagens de exemplos usando as duas estratégias.
+      A variante segmentada consiste da imagem original com a região de interesse apagada (em braco). A tabela \ref{tab:imgset_example} é um exemplo com uma imagem original, binarizada e suas variantes.
 
-      \TODO{*exemplos de treinamento*}
+      \begin{table}[hbt]
+        \caption{Exemplo de preparação de imagem para treinamento do operador}
+        \begin{center}
+          \begin{tabular}{c c c c}
+            Original & Preto e branco & Exemplo de parágrafo & Exemplo de título \\
+            \includegraphics[width=0.2\textwidth]{assets/00000802.png}
+            &
+            \includegraphics[width=0.2\textwidth]{assets/original_images/cacm/802_black_and_white.png}
+            &
+            \includegraphics[width=0.2\textwidth]{assets/802_TextRegion_paragraph.png}
+            &
+            \includegraphics[width=0.2\textwidth]{assets/802_TextRegion_heading.png}
+          \end{tabular}
+        \end{center}
+        \label{tab:imgset_example}
+      \end{table}
 
-      \TODO{Falar sobre binarização em uma seção sobre o dataset e pré-processamentos}
+      O processo de binarização foi melhor detalhado no apêndice \ref{sec:otsu}.
 
     \subsection{Construção dos operadores}
 
-      O algoritmo gerador de operadores morfológicos recebe como entrada um conjunto de pares de imagens de exemplo do passo anterior. Treinamos um operador para cada tipo de região utilizando a biblioteca TRIOS \TODO{ref}. Os parâmetros para o treinamento foram ajustados experimentalmente \TODO{ref experimentos}.
-
-      \TODO{Imagem com 2 a 3 pares de exemplos de segmentação de texto para treinamento de um operador}
+      O algoritmo gerador de operadores morfológicos recebe como entrada um conjunto de pares de imagens de exemplo do passo anterior. Treinamos um operador para cada tipo de região utilizando a biblioteca TRIOS \cite{dostrios}. Os parâmetros para o treinamento foram ajustados experimentalmente como apresentado na seção \ref{sec:experimentos}.
 
     \subsection{Aplicação dos operadores}
 
-      Construidos os operadores para cada tipo de região, aplicamos todos os operadores às imagens que desejamos segmentar obtendo um resultado para cada operador. Sendo $n$ operadores e $m$ imagens, obtemos $nm$ resultados.
+      Construídos os operadores para cada tipo de região, aplicamos todos os operadores às imagens que desejamos segmentar obtendo um resultado para cada operador. Sendo $n$ operadores e $m$ imagens, obtemos $nm$ resultados. A tabela \ref{tab:aplicacao} demonstra a aplicação dos operadores de parágrafo e título a uma imagem.
 
-      \TODO{exemplo de aplicação de $n$ operadores}
+      \begin{table}[hbt]
+        \caption{Exemplo de preparação de imagem para treinamento do operador}
+        \begin{center}
+          \begin{tabular}{c c c}
+            Original & Operador de parágrafo & Operador de título \\
+            \includegraphics[width=0.2\textwidth]{assets/exemplo_aplicacao/695_black_and_white.png}
+            &
+            \includegraphics[width=0.2\textwidth]{assets/exemplo_aplicacao/695_paragraph.png}
+            &
+            \includegraphics[width=0.2\textwidth]{assets/exemplo_aplicacao/695_heading.png}
+          \end{tabular}
+        \end{center}
+        \label{tab:aplicacao}
+      \end{table}
 
     \subsection{Consensualização}
 
-      A aplicação de operadores diferentes à mesma imagem pode gerar resultados incoerentes. Pixels classificados como pertencentes a mais de uma região fazem com que a união dos resultados seja impossível sem nenhum tipo de processamento. Para concluirmos a segmentação é necessário chegar a um consenso sobre qual operador possui a maior probabilidade de estar certo a cada pixel de classificação conflitante.
+      A aplicação de operadores diferentes à mesma imagem pode gerar resultados incoerentes. Pixeis classificados como pertencentes a mais de uma região fazem com que a união dos resultados seja impossível sem nenhum tipo de processamento. Para concluirmos a segmentação é necessário chegar a um consenso sobre qual operador possui a maior probabilidade de estar certo a cada pixel de classificação conflitante.
 
-      Partindo da observação de que pixel pertencente a uma certa região costuma estar cercados por pixels da mesma região, aplicamos um processo de escolha por maior contagem de pixels na vizinhança. Ou seja, se houver um conflito de classificação de um pixel entre texto ou título, conta-se quantos pixels na vizinhança pertencem a uma dada região e a que obtiver maior contagem ganha.
+      Partindo da observação de que pixel pertencente a uma certa região costuma estar cercados por pixeis da mesma região, aplicamos um processo de escolha por maior contagem de pixeis na vizinhança. Ou seja, se houver um conflito de classificação de um pixel entre texto ou título, conta-se quantos pixeis na vizinhança pertencem a uma dada região e a que obtiver maior contagem ganha.
 
-      \TODO{Exemplo de conflito e contagem para consenso}
+\clearpage
 
 \section{Experimentos}
+\label{sec:experimentos}
 
   Realizamos experimentos variando diversos parâmetros em diferentes etapas da segmentação. Apesar de usarmos uma técnica de aprendizado computacional para automatizar parte do processo, identificar quais parâmetros produzem o melhor resultado a um custo desejável (tempo de processamento e poder computacional) é uma tarefa ainda experimental.
 
-  A qualidade da solução e o tempo levado para processá-lo foram medidos a fim de identificar o \TODO{italico} lucus optimus, ou seja, a combinação que produz um bom resultado com um tempo de processamento razoaável.
+  A qualidade da solução e o tempo levado para processá-lo foram medidos a fim de identificar o lucus optimus, ou seja, a combinação que produz um bom resultado com um tempo de processamento razoável.
 
   Os parâmetros escolhidos para análise foram:
 
@@ -408,15 +446,15 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
   \subsection{Base de dados}
 
-    As imagens utilizadas nos experimentos foram obtidas de um banco de dados construído pelos pesquisadores do PRImA ao longo de anos \TODO{ref}. Ele inclui um conjunto de documentos que busca simular um cenário realístico de aplicação, com layouts complexos e diferentes tipos de fontes e formatos de regiões. Isto é importante para avaliar a aplicabilidade do método em situações práticas, onde um controle sobre o formato do conteúdo seria indesejável ou inviável.
+    As imagens utilizadas nos experimentos foram obtidas de um banco de dados construído pelos pesquisadores do PRImA ao longo de anos \cite{Antonacopoulos09arealistic}. Ele inclui um conjunto de documentos que busca simular um cenário realístico de aplicação, com layouts complexos e diferentes tipos de fontes e formatos de regiões. Isto é importante para avaliar a aplicabilidade do método em situações práticas, onde um controle sobre o formato do conteúdo seria indesejável ou inviável.
 
-    No artigo [A Realistic Dataset for Performance Evaluation of Document Layout Analysis] de 2009, os autores apresentam um conjunto de dados com páginas de revistas, artigos científicos diversos, documentos modernos e não apenas históricos.
+    No artigo \cite{Antonacopoulos09arealistic}, os autores apresentam um conjunto de dados com páginas de revistas, artigos científicos diversos, documentos modernos e não apenas históricos.
 
-    O conjunto de dados contém não só imagens mas também arquivos XML [The PAGE (Page Analysis and Ground-truth Elements) Format Framework] com metadados como informações bibliográficas (título, autor, publicação), informações das imagens (resolução, bit depth, modelo do scanner), características do layout (número de colunas, variadade de tamanhos de fontes) e informações administrativas (direitos autorais).
+    O conjunto de dados contém não só imagens mas também arquivos XML \cite{pletschacher2010page} com metadados como informações bibliográficas (título, autor, publicação), informações das imagens (resolução, bit depth, modelo do scanner), características do layout (número de colunas, variedade de tamanhos de fontes) e informações administrativas (direitos autorais).
 
     Os documentos são digitalizados com um cartão escuro por trás para minimizar a exposição da contra página. Posteriormente um algoritmo analisa possíveis falhas, como rotação do documento, marcando-os para redigitalização. Uma correção automática não é utilizada pois isto pode comprometer a qualidade da imagem.
 
-    Uma vez que a imagem foi aceita no banco de dados, inicia-se um processo manual de marcação do grownd-truth. Este trabalho deve ser realizado da forma mais precisa possível pois é a base para determinar a corretude dos algoritmos segmentadores. Por se tratar de uma etapa muito custosa, uma ferramenta semi-automática chamada Aletheia \TODO{ref} é utilizada para agilizar o processo. Esta ferramenta permite a uma pessoa desenhar uma região poligonal em torno de uma região de interesse. Em seguida esta região é automaticamate ajustada pelo software, como se a pessoa estivesse colocando um elástico que aperta a região.
+    Uma vez que a imagem foi aceita no banco de dados, inicia-se um processo manual de marcação do grownd-truth. Este trabalho deve ser realizado da forma mais precisa possível pois é a base para determinar a corretude dos algoritmos segmentadores. Por se tratar de uma etapa muito custosa, uma ferramenta semi-automática chamada Aletheia \cite{clausner2011aletheia} é utilizada para agilizar o processo. Esta ferramenta permite a uma pessoa desenhar uma região poligonal em torno de uma região de interesse. Em seguida esta região é automaticamente ajustada pelo software, como se a pessoa estivesse colocando um elástico que aperta a região.
 
   \subsection{Mistura de publicações no conjunto de treinamento}
 
@@ -425,12 +463,9 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
     Testamos os seguintes conjuntos de imagens de treinamento:
 
     \begin{itemize}
-      \item Comunications of the ACM: 263, 674, 677, 680, 683, 685, 686, 689, 692, 695, 802 e 803.
-      \item TIME Magazine: 232, 720, 721, 723, 782, 783, 784, 785 e 786.
-      \item Publicações misturadas (inclui imagens da Fortune, Business Week, Time, CACM, IEEE e CCEJ): 158,171,232,263,701,722,235,190,720,674,792,730
+      \item Comunications of the ACM: 263, 674, 677, 680, 683, 685, 686, 689, 692, 695, 802 e 803. Este conjunto é chamado de CACM neste texto.
+      \item TIME Magazine: 232, 720, 721, 723, 782, 783, 784, 785 e 786. Este conjunto é chamado de TIME neste texto.
     \end{itemize}
-
-    \TODO{mostra imagens de revistas com fontes bem diferentes}
 
   \subsection{Tipos de regiões}
 
@@ -440,11 +475,11 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
       \item Text
       \begin{enumerate}
         \item Header 
-        \item Headings (títulos)
+        \item Headings (título)
         \item Capital (letras maiores)
         \item Drop Capital
         \item Credit
-        \item Paragraph
+        \item Paragraph (parágrafo)
         \item Floating
         \item Page number
         \item Footer
@@ -458,8 +493,6 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
       \item Table
     \end{enumerate}
 
-    \TODO{esquema de o que cada região rotula}
-
     Nos experimentos realizados nos limitamos a Text Heading e Text Paragraph por limitações de custo e tempo.
 
   \subsection{Quantidade de imagens de treinamento}
@@ -470,43 +503,45 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
   \subsection{Formatos de janelas}
 
-    Variando o tamanho da janela procuramos capturar padrões característicos de cada tipo de região. O tamanho da janela impacta o tempo de processamento da etapa mais custosa que é a minimização, logo descobrir um tamanho de janela com um bom custo benefício é excêncial para aplicações práticas. Sabemos que nem sempre janelas maiores produzem resultados melhores \TODO{ref}, portanto este experimento procura descobrir o melhor.
+    Variando o tamanho da janela procuramos capturar padrões característicos de cada tipo de região. O tamanho da janela impacta o tempo de processamento da etapa mais custosa que é a minimização, logo descobrir um tamanho de janela com um bom custo benefício é essencial para aplicações práticas. Sabemos que nem sempre janelas maiores produzem resultados melhores, portanto este experimento procura descobrir o melhor.
 
-    Utilizamos janelas densas e esparças, ou seja, janelas com todos os pontos preenchidos ou apenas alguns. Os tamanhos variam de 3x3 a 7x7 para densas e de 3x3 a 11x11 para as esparças.
-
-    \TODO{imagens de algumas janelas}
+    Utilizamos janelas densas e esparsas, ou seja, janelas com todos os pontos preenchidos ou apenas alguns. Os tamanhos variam de 3x3 a 7x7 para densas e de 3x3 a 11x11 para as esparsas.
 
   \subsection{Tamanho da janela de consensualização}
 
-    Experimentamos janelas variando de 3x3 a 15x15. Procuramos entender até quando a hipótese de que pixels de uma determinada região não ocorrem isoladamente é verdadeira.
+    Experimentamos janelas variando de 3x3 a 15x15. Procuramos entender até quando a hipótese de que pixeis de uma determinada região não ocorrem isoladamente é verdadeira.
 
   \subsection{Aplicação}
 
-    Construímos mais de 150 operadores e os aplicamos aos nossos conjuntos de imagens de teste, cada um contendo 5 das imagens não envolvidas no treinamento dos operadores. Salvamos todas as imagens produzidas, totalizando \TODO{x GB} em resultados.
+    Construímos 200 operadores e os aplicamos aos nossos conjuntos de imagens de teste, cada um contendo imagens não envolvidas no treinamento dos operadores. Salvamos todas as imagens produzidas, totalizando 6.8 GB em resultados.
 
-    Todos os experimentos foram realizados utilizando scripts ruby para automatizar a ardua tarefa. Abaixo listamos todos os scripts com uma breve descrição.
+    Após aplicarmos todos os operadores, executamos o processo de consensualização para finalmente classificarmos os pixeis como pertencentes a um parágrafo, título ou desconhecido.
 
-    \begin{itemize}
-      \item sample\_generator.rb produz todos os conjuntos de imagens para treinamento e teste, ou seja, ele transforma todas as imagens e XMLs da base de dados original em entradas apropriadas para as ferramentas que utilizamos. \TODO{enxer linguiça falando como implementamos}
-      \item build\_operators.rb gera todos os \TODO{X} operadores utilizados nos experimentos. \TODO{falar q usa o trios\_build}
-      \item apply\_all.rb aplica todos os operadores e salva os resultados, totalizando \TODO{X} imagens em \TODO{x gb}.
-      \item analyze.rb extrai todas as estatísticas apresentadas na próxima seção.
-    \end{itemize}
+  \subsection{Avaliação da segmentação}
 
+    Os dois principais métodos utilizados para avaliar a qualidade das soluções para este problema são a comparação da classificação dos pixeis individualmente ou a classificação de regiões, como sugerido no artigo \cite{10.1109/ICDAR.2007.207}.
+    Optamos pela comparação entre pixeis pois nosso método produz como resultado a classificação de pixeis e não a delimitação de regiões. Seria necessário agrupar os pixeis em regiões para que pudéssemos realizar outros tipo de avaliação, o que foge ao escopo deste trabalho.
+
+    Uma vantagem na comparação entre pixeis e não regiões é o fato de que evitamos restrições arbitrárias na forma das regiões, porém utilizamos muito mais espaço do que o formato de regiões delimitadas por polígonos.
+
+\clearpage
+    
 \section{Resultados}
+\label{sec:resultados}
 
-  O processo de segmentação foi avaliado em dois diferentes estágios: após a aplicação do operador morfológico e após a consensualização. Para cada imagem processada contamos a quantidade de classificações em cada uma das categorias de erro/acerto da tabela \ref{tab:result_classes}. Com a contagem destas classes calculamos quatro métricas diferentes tabeladas em \ref{tab:metrics}. Apenas contamos quando o pixel na imagem original é ligado.
+  O processo de segmentação foi avaliado após a aplicação do operador morfológico. Para cada imagem processada contamos a quantidade de classificações em cada uma das categorias de erro ou acerto da tabela \ref{tab:result_classes}. A partir da contagem destas classes calculamos quatro métricas diferentes tabeladas em \ref{tab:metrics}. Apenas contamos quando o pixel na imagem original é ligado.
+
   
   \begin{table}[htb]
     \caption{Tabela com classes de resultados}
-    \begin{center}
+    \centerline{  
       \begin{tabular}{c c | c | c |}
         \cline{3-4}
          & & \multicolumn{2}{| c |}{Classificado como} \\
          \cline{3-4}
          & & positivo & negativo \\
          \hline
-         \multicolumn{1}{|c|}{\multirow{2}{*}{Gabaritado como}} & positivo & 
+         \multicolumn{1}{|c|}{\multirow{2}{*}{\begin{tabular}[x]{@{}c@{}}Gabaritado\\ como\end{tabular}}} & positivo & 
          \begin{tabular}[x]{@{}c@{}}Verdadeiro positivo ($tp$).\\ Pixel apagado corretamente.\end{tabular}
          &
          \begin{tabular}[x]{@{}c@{}}Falso negativo ($fn$).\\ Pixel deveria ter sido apagado.\end{tabular}\\
@@ -515,8 +550,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
          \begin{tabular}[x]{@{}c@{}}Falso positivo ($fp$).\\ Pixel não deveria ter sido apagado.\end{tabular}
          & \begin{tabular}[x]{@{}c@{}}Verdadeiro negativo ($tn$).\\ Pixel mantido ligado corretamente.\end{tabular}\\
          \hline
-      \end{tabular}
-    \end{center}
+      \end{tabular}}
     \label{tab:result_classes}
   \end{table}
 
@@ -539,17 +573,19 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
   \end{table}
 
   \begin{itemize}
-    \item Precision (Precisão): quantidade de pixels corretamente classificados como pertencentes a uma região dividido pelo total de pixels classificados.
-    \item Recall (Sensibilidade): quantidade de pixels corretamente classificados sobre quantidade de todos os pixels que deveria ter sido classificados.
+    \item Precision (Precisão): quantidade de pixeis corretamente classificados como pertencentes a uma região dividido pelo total de pixeis classificados.
+    \item Recall (Sensibilidade): quantidade de pixeis corretamente classificados sobre quantidade de todos os pixeis que deveria ter sido classificados.
     \item F-measure: média harmônica de Precision e Recall.
     \item MCC (Coeficiente de correlação de Mathew): Métrica bastante utilizada na avaliação de classificadores binários. Leva em consideração verdadeiros e falso positivos e negativos. O valor 0 indica que o classificador é equivalente a um classificador aleatório. Funciona bem com classes de tamanhos muito diferentes.
   \end{itemize}
 
-  A métrica utilizada nas referências teóricas sobre operadores morfológicos automaticamente gerados é o MAE (sigla em inglês para Erro Absoluto Médio) $\frac{fp + fn}{N}$, sendo $N$ o número total de pixels na imagem. Porém esta métrica não é muito elucidadora. Se, por exemplo, um dado operador ideal afetar 5\% dos pixels de uma imagem e o operador gerado afetar 5\% dos pixels da imagem não pertencentes aos 5\% do ideal, o MAE seria de 5\%. Ou seja, o operador errou todos os pixels que ele deveria ter modificado e ainda modificou outros indevidamente. Ela não distingue entre diferentes tipos de erro: rotulação parcial de regiões e rotulação indevida de regiões.
+  A métrica utilizada nas referências teóricas sobre operadores morfológicos automaticamente gerados é o MAE (sigla em inglês para Erro Absoluto Médio), cuja fórmula pode ser escrita como $\frac{fp + fn}{N}$, sendo $N$ o número total de pixeis na imagem. Porém esta métrica não é muito elucidadora para avaliar segmentação de páginas. Se, por exemplo, um dado operador ideal afetar 5\% dos pixeis de uma imagem e o operador gerado afetar 5\% dos pixeis da imagem não pertencentes aos 5\% do ideal, o MAE seria de 5\%. Ou seja, o operador errou todos os pixeis que ele deveria ter modificado e ainda modificou outros indevidamente. Ela não distingue entre diferentes tipos de erro como rotulação parcial de regiões e rotulação indevida de regiões. Já o F-measure resultaria em 0 e o MCC (Coeficiente de Correlação de Matthew) poderia inclusive apresentar um valor negativo.
 
-  Já o F-measure resultaria em 0 e o MCC poderia inclusive apresentar um valor negativo.
+  \subsection{Valores observados}
 
-  Também apresentamos o tempo, em escala linear (figuras \ref{fig:paragraph_build_time} e \ref{fig:heading_build_time}) e logarítmica (figuras \ref{fig:paragraph_build_time_log} e \ref{fig:heading_build_time_log}), para contrução dos operadores de parágrafo e título.
+  As tabelas \ref{tab:cacm_precision_paragraph}, \ref{tab:cacm_recall_paragraph}, \ref{tab:cacm_f1_paragraph} e \ref{tab:cacm_mcc_paragraph} contém os valores de Precision, Recall, F-measure e MCC para a classificação de parágrafos do conjunto de teste CACM. As tabelas \ref{tab:time_precision_paragraph}, \ref{tab:time_recall_paragraph}, \ref{tab:time_f1_paragraph} e \ref{tab:time_mcc_paragraph} contém os valores para classificação de parágrafos do conjunto TIME. As tabelas \ref{tab:cacm_precision_heading}, \ref{tab:cacm_recall_heading}, \ref{tab:cacm_f1_heading}, \ref{tab:cacm_mcc_heading}, \ref{tab:time_precision_heading}, \ref{tab:time_recall_heading}, \ref{tab:time_f1_heading} e \ref{tab:time_mcc_heading} contém os valores para a classificação de títulos. Cada tabela possui um gráfico correspondente com as janelas na horizontal, o valor da métrica na vertical. Cada cor de barra está relacionada a um tamanho de conjunto de treinamento.
+
+  Também apresentamos o tempo, em escala linear (figuras \ref{fig:paragraph_build_time} e \ref{fig:heading_build_time}) e logarítmica (figuras \ref{fig:paragraph_build_time_log} e \ref{fig:heading_build_time_log}) para a construção dos operadores de parágrafo e título.
 
   \begin{figure*}[p]
     \centerline{\includegraphics[width=1.2\textwidth]{assets/experiment_charts/TextRegion_paragraph_time.png}}
@@ -593,6 +629,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.8418& 0.8465& 0.8826& 0.8918& 0.9125& 0.8376& 0.8601& 0.8831& 0.9289& 0.9044\\
         \hline  
       \end{tabular}
+      \label{tab:cacm_precision_paragraph}
     \end{table}
   \end{center}
     
@@ -620,6 +657,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.7796& 0.9591& 0.9879& 0.9802& 0.9781& 0.7781& 0.9939& 0.9953& 0.9884& 0.9896\\
         \hline  
       \end{tabular}
+      \label{tab:cacm_recall_paragraph}
     \end{table}
   \end{center}
 
@@ -647,6 +685,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.8086& 0.8984& 0.9319& 0.9336& 0.9440& 0.8058& 0.9215& 0.9354& 0.9576& 0.9448\\
         \hline  
       \end{tabular}
+      \label{tab:cacm_f1_paragraph}
     \end{table}
   \end{center}
 
@@ -674,6 +713,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.3795& 0.5740& 0.7246& 0.7302& 0.7767& 0.3691& 0.6810& 0.7259& 0.8235& 0.7743\\
         \hline  
       \end{tabular}
+      \label{tab:cacm_mcc_paragraph}
     \end{table}
   \end{center}
 
@@ -700,6 +740,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.7493& 0.8139& 0.8775& 0.9087& 0.9304& 0.7226& 0.8364& 0.8221& 0.9094& 0.8272\\
         \hline  
       \end{tabular}
+      \label{tab:time_precision_paragraph}
     \end{table}
   \end{center}
 
@@ -726,6 +767,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.7212& 0.8436& 0.8982& 0.9177& 0.9251& 0.7645& 0.7446& 0.9790& 0.9595& 0.9728\\
         \hline  
       \end{tabular}
+      \label{tab:time_recall_paragraph}
     \end{table}
   \end{center}
 
@@ -752,6 +794,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.7338& 0.8276& 0.8868& 0.9123& 0.9270& 0.7418& 0.7869& 0.8932& 0.9335& 0.8937\\
         \hline  
       \end{tabular}
+      \label{tab:time_f1_paragraph}
     \end{table}
   \end{center}
 
@@ -778,6 +821,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.5977& 0.7310& 0.8227& 0.8629& 0.8863& 0.6004& 0.6854& 0.8350& 0.8947& 0.8363\\
         \hline  
       \end{tabular}
+      \label{tab:time_mcc_paragraph}
     \end{table}
   \end{center}
 
@@ -805,6 +849,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.0000& 0.1864& 0.1848& 0.2334& 0.2842& 0.0467& 0.0000& 0.1069& 0.3256& 0.1771\\
         \hline  
       \end{tabular}
+      \label{tab:cacm_precision_heading}
     \end{table}
   \end{center}
     
@@ -832,6 +877,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0002& 0.0269& 0.1113& 0.2709& 0.1731& 0.0000& 0.2866& 0.3531& 0.4885\\
         \hline  
       \end{tabular}
+      \label{tab:cacm_recall_heading}
     \end{table}
   \end{center}
 
@@ -859,6 +905,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0004& 0.0429& 0.1331& 0.2481& 0.0601& 0.0000& 0.1302& 0.3169& 0.2259\\
         \hline  
       \end{tabular}
+      \label{tab:cacm_f1_heading}
     \end{table}
   \end{center}
 
@@ -886,6 +933,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0033& 0.0416& 0.1115& 0.2162& -0.0879& 0.0000& 0.0435& 0.2838& 0.1851\\
         \hline  
       \end{tabular}
+      \label{tab:cacm_mcc_heading}
     \end{table}
   \end{center}
 
@@ -912,6 +960,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0147& 0.0122& 0.0495& 0.0721& 0.0189& 0.0000& 0.0274& 0.1172& 0.0341\\
         \hline  
       \end{tabular}
+      \label{tab:time_precision_heading}
     \end{table}
   \end{center}
     
@@ -938,6 +987,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0000& 0.0003& 0.0056& 0.0256& 0.1786& 0.0000& 0.1607& 0.0111& 0.1943\\
         \hline  
       \end{tabular}
+      \label{tab:time_recall_heading}
     \end{table}
   \end{center}
 
@@ -964,6 +1014,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.0000& 0.0000& 0.0005& 0.0099& 0.0367& 0.0331& 0.0000& 0.0452& 0.0199& 0.0562\\
         \hline  
       \end{tabular}
+      \label{tab:time_f1_heading}
     \end{table}
   \end{center}
 
@@ -990,6 +1041,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
         \multicolumn{1}{|l|}{50\%}& 0.0000& -0.0001& -0.0015& 0.0069& 0.0251& -0.0371& 0.0000& -0.0053& 0.0263& 0.0121\\
         \hline  
       \end{tabular}
+      \label{tab:time_mcc_heading}
     \end{table}
   \end{center}
 
@@ -999,37 +1051,147 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
     \label{fig:time_TextRegion_heading_mcc}
   \end{figure*}
 
-  
+\clearpage
+
+  \subsection{Imagens finais}
+
+    As tabelas \ref{tab:segmentation_689}, \ref{tab:segmentation_692}, \ref{tab:segmentation_695}, \ref{tab:segmentation_802} e \ref{tab:segmentation_803} apresentam as duplas de imagens segmentada e ideal para cada uma das imagens do conjunto de teste CACM. As tabelas \ref{tab:segmentation_783}, \ref{tab:segmentation_784}, \ref{tab:segmentation_785} e\ref{tab:segmentation_786} contém as imagens da TIME. A imagem segmentada exibida foi obtida utilizando o operador morfológico de melhor F-measure (janela 9x9 esparsa com maior número de exemplos de treinamento). A cor azul representa regiões de parágrafo, verde para títulos e vermelho para marcar o que sobrou.
+
+    \begin{table}[p]
+      \caption{Segmentação da imagem 689}
+      \begin{center}
+        \begin{tabular}{ c c }
+          Ideal & Segmentada \\
+          \includegraphics[width=0.4\textwidth]{assets/final_ideal/cacm_689_ideal.png}
+          &
+          \includegraphics[width=0.4\textwidth]{assets/result_imagens/cacm_50_percent_sparse_9x9_689_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_689}
+    \end{table}
+    \begin{table}[p]
+      \caption{Segmentação da imagem 692}
+      \begin{center}
+        \begin{tabular}{ c c }
+        \includegraphics[width=0.4\textwidth]{assets/final_ideal/cacm_692_ideal.png}
+        &
+        \includegraphics[width=0.4\textwidth]{assets/result_imagens/cacm_50_percent_sparse_9x9_692_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_692}
+    \end{table}
+    \begin{table}[p]
+      \caption{Segmentação da imagem 695}
+      \begin{center}
+        \begin{tabular}{ c c }
+        \includegraphics[width=0.4\textwidth]{assets/final_ideal/cacm_695_ideal.png}
+        &
+        \includegraphics[width=0.4\textwidth]{assets/result_imagens/cacm_50_percent_sparse_9x9_695_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_695}
+    \end{table}
+    \begin{table}[p]
+      \caption{Segmentação da imagem 802}
+      \begin{center}
+        \begin{tabular}{ c c }
+        \includegraphics[width=0.4\textwidth]{assets/final_ideal/cacm_802_ideal.png}
+        &
+        \includegraphics[width=0.4\textwidth]{assets/result_imagens/cacm_50_percent_sparse_9x9_802_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_802}
+    \end{table}
+    \begin{table}[p]
+      \caption{Segmentação da imagem 803}
+      \begin{center}
+        \begin{tabular}{ c c }
+        \includegraphics[width=0.4\textwidth]{assets/final_ideal/cacm_803_ideal.png}
+        &
+        \includegraphics[width=0.4\textwidth]{assets/result_imagens/cacm_50_percent_sparse_9x9_803_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_803}
+    \end{table}
+
+    % 
+    % TIME
+    % 
+
+    \begin{table}[p]
+      \caption{Segmentação da imagem 783}
+      \begin{center}
+        \begin{tabular}{ c c }
+          Ideal & Segmentada \\
+          \includegraphics[width=0.4\textwidth]{assets/final_ideal/time_783_ideal.png}
+          &
+          \includegraphics[width=0.4\textwidth]{assets/result_imagens/time_50_percent_sparse_9x9_783_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_783}
+    \end{table}
+    \begin{table}[p]
+      \caption{Segmentação da imagem 784}
+      \begin{center}
+        \begin{tabular}{ c c }
+          Ideal & Segmentada \\
+          \includegraphics[width=0.4\textwidth]{assets/final_ideal/time_784_ideal.png}
+          &
+          \includegraphics[width=0.4\textwidth]{assets/result_imagens/time_50_percent_sparse_9x9_784_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_784}
+    \end{table}
+    \begin{table}[p]
+      \caption{Segmentação da imagem 785}
+      \begin{center}
+        \begin{tabular}{ c c }
+          Ideal & Segmentada \\
+          \includegraphics[width=0.4\textwidth]{assets/final_ideal/time_785_ideal.png}
+          &
+          \includegraphics[width=0.4\textwidth]{assets/result_imagens/time_50_percent_sparse_9x9_785_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_785}
+    \end{table}
+    \begin{table}[p]
+      \caption{Segmentação da imagem 786}
+      \begin{center}
+        \begin{tabular}{ c c }
+          Ideal & Segmentada \\
+          \includegraphics[width=0.4\textwidth]{assets/final_ideal/time_786_ideal.png}
+          &
+          \includegraphics[width=0.4\textwidth]{assets/result_imagens/time_50_percent_sparse_9x9_786_final.png}
+        \end{tabular}
+      \end{center}
+      \label{tab:segmentation_786}
+    \end{table}
+
+\clearpage
 
 \section{Conclusão}
+\label{sec:conclusao}
 
+  Observamos comportamentos diferentes na classificação de parágrafos e títulos. A quantidade de imagens demonstrou-se menos relevante na classificação parágrafos do que na classificação de títulos. Isto se deve a maior quantidade de exemplos por página de texto de parágrafo do que de títulos.
+
+  O tamanho da janela é o fator mais sensível, tanto para a qualidade quanto para o tempo de processamento. Janelas maiores porém esparsas apresentaram os melhores resultados, sendo o melhor deles observado para janelas 9x9 esparsas, atingindo F-measure de 0,96 para CACM e 0,93 para a TIME.
+
+  Porém nem sempre a maior janela produz o melhor resultado. As janelas 11x11 desempenharam pior que as 9x9. Quanto maior a janela, mais exemplos são necessários. Podemos ver que em janelas maiores o tamanho do conjunto de treinamento possui maior influência na qualidade. Com janelas até 5x5 a quantidade de exemplos quase não altera a qualidade ou até piora.
+
+  Exemplos ruins também podem comprometer a qualidade do operador. Fontes muito parecidas para títulos e outros tipos de texto podem fornecer exemplos contraditórios, ou seja, hora um certo padrão consta como título hora não. Podemos ver um exemplo deste fenômeno na imagem \ref{tab:segmentation_695} onde o texto à direita foi classificado como título por possuir características de título. Parte do motivo por este problema ocorrer é decorrente da decisão de testarmos apenas dois tipos de região (parágrafo e título). Possivelmente, caso tivéssemos classificados outros tipos de texto, poderíamos obter resultados melhores na etapa de consensualização.
+
+  Uma outra possível melhoria seria trabalhar com imagens redimensionadas (reduzidas), fazendo com que os títulos ficassem menores, cabendo melhor dentro das janelas utilizadas.
+
+  Não pudemos testar janelas maiores que 11x11 pois o tempo de processamento cresce muito rapidamente tornando o processo muito custoso.
+
+  A comparação com outros métodos foi comprometida pela escolha das regiões a serem segmentadas. No artigo \cite{DBLP:conf/icdar/2009} vemos os resultados dos principais métodos para textos em geral e não parágrafos e títulos separadamente. Um outro problema é o método para avaliação, que utiliza polígono isotéticos, como proposto no artigo \cite{10.1109/ICDAR.2007.207}. Teríamos que realizar algum tipo de transformação que definiria polígonos em torno dos pixeis de uma certa região, assim como fez o método descrito em \cite{Moll07documentcontent}.
+
+  Acreditamos que o método proposto pode ser empregado na extração de texto de documentos. Porém, diversos ajustes de otimização seriam necessários para criar uma ferramenta utilizável em situações práticas. O treinamento dos operadores é muito lento e aplicação também.
 
 \section{Apêndice}
 
-\subsection{TRIOS}
-
-\TODO{O TRIOS é apenas uma implementação do processo de treinamento de
-  operadores morfológicos. Assim, se for para colocar isso na
-  monografia, acho que deveria estar no Apêndice.}
-      \begin{itemize}
-        \item Imagem enquanto conjunto ou função
-        \item Transformação entre conjuntos
-        \item Exemplos: dilatação, erosão, abertura, fechamento, gradiente, hit-or-miss, sup-gerador.
-        \item Operadores invariantes por translação e localmente definidos.
-        \item W-Operadores.
-        \item Teorema da decomposição canônica (não sei quanto disto eu consigo explicar).
-        \item Conjuntos aleatórios S e I. Caracterização por um processo estacionário local (X, y).
-        \item Otimalidade de Psy com base num operador localmente definido (MAE).
-        \item Algoritmo: Estimativa de P(y | X), decisão, generalização (ISI?).
-        \item Bias-Variance Tradeoff
-        \item Explorando estrutura de Psy? (talvez isso caiba melhor na lista de estratégias a seguir)
-        \item Escolha da janela ótima.
-        \item Operador multi-nível.
-      \end{itemize}
-
   \subsection{Algoritmo de Otsu para binarização}
-
-    \TODO{mover esta subseção para dentro de dataset e pré processamentos}
+  \label{sec:otsu}
 
     Implementar e avaliar cada algoritmo binarizador vai além do escopo deste trabalho, portanto escolhemos um bom algoritmo segundo os resultados obtidos em \cite{citeulike:890354}. Como o próprio artigo aponta, não foi encontrado um método que apresentasse desempenho superior em todas os cenários de teste realizados.
 
@@ -1130,38 +1292,24 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
     Como podemos notar, para $t = 50\%$ atingimos o menor valor de $\sigma^{2}_{w} \approx 512693389$. Neste caso o limiar coincide com o único vale no histograma, porém isto nem sempre será válido. Algumas imagens não possuem vales bem definidos. Este algoritmo não se baseia no formato do histograma mas sim na coesão intra classe e na separabilidade das classes.
 
-    Uma desvantagem de utilizar este algoritmo é a influência da média de todo os pixels da imagem. Isto pode fazer com que o limiar ótimo para a página toda não seja o mesmo que o de dentro de uma janela.
+    Uma desvantagem de utilizar este algoritmo é a influência da média de todo os pixeis da imagem. Isto pode fazer com que o limiar ótimo para a página toda não seja o mesmo que o de dentro de uma janela.
 
-    % 
-    % Usei o imagemagick para criar uma imagem em tons de cinza com a quantidade de níveis desejado, usando o seguinte comando
-    % 
-    % convert -type Grayscale -depth 3 h8rgb.png h_3grayscale.png
-    % 
-    % Posteriormente gerei imagens com threshold em diferentes níveis
-    % 
-    % convert -threshold 60% h_3grayscale.png h60t.png
-    % 
-    % o comando identify -verbose mostra o histograma
-    % 
-    % Usei o gráfico do site http://www.labbookpages.co.uk/software/imgProc/otsuThreshold.html como exemplo
-    % 
-    % binarizado com ../otsuthresh -g save h_3grayscale.png bin.gif
-    % 
+    \subsection{Implementação}
 
-      %% \subsubsection{Álgebra booleana}
+    Todos os experimentos foram realizados utilizando scripts ruby e python para automatizar a tarefa. Também utilizamos a biblioteca ImageMagick e bibliotecas para manipulação de XML.
 
-      %% Definições básicas até minimização de expressões.
+    O processo todo consistiu em baixar a base de dados do PRImA, processá-las gerando as entradas para o TRIOS, construir os operadores, aplicá-los, consensualizar e extrair métricas.
 
-      %% \subsubsection{Probabilidade}
+    Este trabalho tem como objetivo provar um conceito: avaliar a aplicabilidade de operadores morfológicos à segmentação de página. Logo o código gerado não é destino a aplicações comerciais.
 
-      %% \begin{itemize}
-      %%   \item Espaço amostral, eventos, etc
-      %%   \item FDP
-      %%   \item Probabilidade conjunta e condicional
-      %%   \item Variável aleatória
-      %%   \item Experança estatística
-      %%   \item Processo estacionário
-      %% \end{itemize}
+    \begin{itemize}
+      \item sample\_generator.rb produz todos os conjuntos de imagens para treinamento e teste, ou seja, ele transforma todas as imagens e XMLs da base de dados original em entradas apropriadas para as ferramentas que utilizamos.
+      \item imgset\_training\_gen.rb gera e aplica todos os 200 operadores utilizados nos experimentos. Utiliza os executáveis trios\_build e trios\_apply fornecidos pelo TRIOS.
+      \item measures.py extrai todas as estatísticas apresentadas na seção \ref{sec:resultados}.
+      \item consensus.py faz a união das segmentações realizadas pelo apply\_all.rb
+      \item merge.py cria imagens segmentadas coloridas para visualização.
+    \end{itemize}
+
 
 %\bibliographystyle{alpha}
 {\small 
