@@ -158,7 +158,7 @@ manter a qualidade. Documentos digitalizados podem ser processados
 eficientemente em processos que envolvem armazenamento, edição,
 transmissão, ou busca, por exemplo.
 
-Devido à grande quantidade de documentos, é interessante que o seu
+Devido a grande quantidade de documentos, é interessante que o seu
 processamento seja realizado de forma automatizada ou pelo menos
 semi-automatizada. Para tal, diversas soluções computacionais vêm
 sendo propostas para o problema ao longo dos anos desde o surgimento
@@ -195,7 +195,7 @@ todas as imagens definidas em $E$ por $K^{E}$,
 
   \subsubsection{Operadores morfológicos binário}
 
-    Uma função $f \in \{ 0, 1 \}^E$ pode ser vista como indicadora de um conjunto $S_f \subseteq E$, ou seja, para todo $x \in E$, $x \in S_f \Leftrightarrow f(x) = 1$. Desta forma, uma função binária pode ser vista como um conjunto. Uma função entre imagens pode ser vista como uma função entre conjuntos. Conjuntos adicionados da relação de inclusão constituem algebricamente um reticulados Booleano. Operadores morfológicos binários são operadores vistos como mapeamentos entre reticulados booleanos.
+    Uma função $f \in \{ 0, 1 \}^E$ pode ser vista como indicadora de um conjunto $S_f \subseteq E$, ou seja, para todo $x \in E$, $x \in S_f \Leftrightarrow f(x) = 1$. Desta forma, uma função binária pode ser vista como um conjunto. Uma função entre imagens pode ser vista como uma função entre conjuntos. Conjuntos adicionados da relação de inclusão constituem algebricamente um reticulado booleano. Operadores morfológicos binários são operadores vistos como mapeamentos entre reticulados booleanos.
 
   \subsubsection{Operadores localmente definidos e invariantes por translação}
 
@@ -307,7 +307,7 @@ A partir deste conjunto de treinamento um operador é gerado, o qual podemos apl
 
 \subsection{Formalização}
 
-Assumimos que as imagens originais e ideias são realizações dos conjuntos aleatória $S$ e $I$, com distribuição de probabilidade conjunta $P(S,I)$. Supõe-se que esta função seja caracterizada por um processo local $(S \cap Wz, I(z))$, com $S \cap Wz \in P(W_z)$, conjunto potência de $W_z$, e $I(z) \in \{0, 1\}$. Ou seja, as imagens de exemplo passam a ser vistas como realizações de conjuntos aleatórios localmente definidos pela janela $W$. Denotaremos este processo por $(X, y)$.
+Assumimos que as imagens originais e ideias são realizações dos conjuntos aleatórios $S$ e $I$, com distribuição de probabilidade conjunta $P(S,I)$. Supõe-se que esta função seja caracterizada por um processo local $(S \cap Wz, I(z))$, com $S \cap Wz \in P(W_z)$, conjunto potência de $W_z$, e $I(z) \in \{0, 1\}$. Ou seja, as imagens de exemplo passam a ser vistas como realizações de conjuntos aleatórios localmente definidos pela janela $W$. Denotaremos este processo por $(X, y)$.
 
 Desta forma, o trabalho de construção de um operador l.d. e i.t. $\psi$ que se aproxime do operador ideal $\Psi$, passa a ser o de minizar o erro absoluto médio ($MAE$), dado pela seguinte expressão:
 
@@ -452,9 +452,9 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
     O conjunto de dados contém não só imagens mas também arquivos XML \cite{pletschacher2010page} com metadados como informações bibliográficas (título, autor, publicação), informações das imagens (resolução, bit depth, modelo do scanner), características do layout (número de colunas, variedade de tamanhos de fontes) e informações administrativas (direitos autorais).
 
-    Os documentos são digitalizados com um cartão escuro por trás para minimizar a exposição da contra página. Posteriormente um algoritmo analisa possíveis falhas, como rotação do documento, marcando-os para redigitalização. Uma correção automática não é utilizada pois isto pode comprometer a qualidade da imagem.
+    Os documentos são digitalizados com um cartão escuro por trás para minimizar a exposição da contra página. Posteriormente um algoritmo analisa possíveis falhas, como rotação do documento, marcando-os para redigitalização. Uma correção automática não é utilizada, pois isto pode comprometer a qualidade da imagem.
 
-    Uma vez que a imagem foi aceita no banco de dados, inicia-se um processo manual de marcação do grownd-truth. Este trabalho deve ser realizado da forma mais precisa possível pois é a base para determinar a corretude dos algoritmos segmentadores. Por se tratar de uma etapa muito custosa, uma ferramenta semi-automática chamada Aletheia \cite{clausner2011aletheia} é utilizada para agilizar o processo. Esta ferramenta permite a uma pessoa desenhar uma região poligonal em torno de uma região de interesse. Em seguida esta região é automaticamente ajustada pelo software, como se a pessoa estivesse colocando um elástico que aperta a região.
+    Uma vez que a imagem foi aceita no banco de dados, inicia-se um processo manual de marcação do grownd-truth. Este trabalho deve ser realizado da forma mais precisa possível, pois é a base para determinar a corretude dos algoritmos segmentadores. Por se tratar de uma etapa muito custosa, uma ferramenta semi-automática chamada Aletheia \cite{clausner2011aletheia} é utilizada para agilizar o processo. Esta ferramenta permite a uma pessoa desenhar uma região poligonal em torno de uma região de interesse. Em seguida esta região é automaticamente ajustada pelo software, como se a pessoa estivesse colocando um elástico que aperta a região.
 
   \subsection{Mistura de publicações no conjunto de treinamento}
 
@@ -497,7 +497,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
 
   \subsection{Quantidade de imagens de treinamento}
 
-    A quantidade de imagens no conjunto de treinamento pode afetar a variedade e quantidade de padrões amostrados, influenciando diretamente a qualidade da solução. A sensibilidade a este fator pode depender to tipo de região a ser segmentada, caso a quantidade de amostras por imagem varie por região. O tempo para se treinar o operador também é impactado, pois deve-se coletar mais amostras.
+    A quantidade de imagens no conjunto de treinamento pode afetar a variedade e quantidade de padrões amostrados, influenciando diretamente a qualidade da solução. A sensibilidade a este fator pode depender do tipo de região a ser segmentada, caso a quantidade de amostras por imagem varie por região. O tempo para se treinar o operador também é impactado, pois deve-se coletar mais amostras.
 
     Treinamos operadores utilizando cinco tamanhos de conjuntos (de uma a cinco imagens).
 
@@ -520,7 +520,7 @@ O método proposto é baseado em operadores morfológicos automaticamente gerado
   \subsection{Avaliação da segmentação}
 
     Os dois principais métodos utilizados para avaliar a qualidade das soluções para este problema são a comparação da classificação dos pixeis individualmente ou a classificação de regiões, como sugerido no artigo \cite{10.1109/ICDAR.2007.207}.
-    Optamos pela comparação entre pixeis pois nosso método produz como resultado a classificação de pixeis e não a delimitação de regiões. Seria necessário agrupar os pixeis em regiões para que pudéssemos realizar outros tipo de avaliação, o que foge ao escopo deste trabalho.
+    Optamos pela comparação entre pixeis, pois nosso método produz como resultado a classificação de pixeis e não a delimitação de regiões. Seria necessário agrupar os pixeis em regiões para que pudéssemos realizar outros tipo de avaliação, o que foge ao escopo deste trabalho.
 
     Uma vantagem na comparação entre pixeis e não regiões é o fato de que evitamos restrições arbitrárias na forma das regiões, porém utilizamos muito mais espaço do que o formato de regiões delimitadas por polígonos.
 
